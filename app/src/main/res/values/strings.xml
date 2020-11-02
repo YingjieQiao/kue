@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">android1</string>
+    <string name="button_label_stats">statistics</string>
+    <string name="button_label_cook">cook</string>
+    <string name="button_label_settings">settings</string>
+    <string name="button_label_cashier">cashier</string>
+    <string name="text_label_kue">Kue</string>
+</resources>
