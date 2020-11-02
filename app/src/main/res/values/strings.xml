@@ -5,4 +5,8 @@
     <string name="button_label_settings">settings</string>
     <string name="button_label_cashier">cashier</string>
     <string name="text_label_kue">Kue</string>
+    <string name="menu">Menu (a lot of food buttons)</string>
+    <string name="button">Button</string>
+    <string name="a_list_of_orders_and_clickable_done">A list of orders and clickable Done</string>
+    <string name="graph_and_diagrams">graph and diagrams</string>
 </resources>
