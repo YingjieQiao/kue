@@ -10,47 +10,33 @@
         android:id="@+id/statistics"
         android:layout_width="278dp"
         android:layout_height="111dp"
-        android:layout_marginTop="340dp"
+        android:layout_marginTop="512dp"
         android:background="@color/colorPrimary"
         android:onClick="showStats"
         android:text="@string/button_label_stats"
         android:textColor="@android:color/background_dark"
+        android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="statistics"
-        android:textSize="32sp" />
+        tools:text="statistics" />
 
     <Button
         android:id="@+id/cook"
         android:layout_width="278dp"
         android:layout_height="102dp"
-        android:layout_marginTop="216dp"
+        android:layout_marginTop="328dp"
         android:background="@color/colorPrimary"
         android:onClick="showCook"
         android:text="@string/button_label_cook"
         android:textColor="@android:color/background_dark"
+        android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="cook"
-        android:textSize="32sp" />
-
-    <Button
-        android:id="@+id/settings"
-        android:layout_width="283dp"
-        android:layout_height="124dp"
-        android:layout_marginTop="476dp"
-        android:background="@color/colorPrimary"
-        android:onClick="showSettings"
-        android:text="@string/button_label_settings"
-        android:textColor="@android:color/background_dark"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textSize="32sp" />
+        tools:text="cook" />
 
     <TextView
         android:id="@+id/kue"
@@ -71,16 +57,16 @@
         android:id="@+id/cashier"
         android:layout_width="282dp"
         android:layout_height="105dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="148dp"
         android:background="@color/colorPrimary"
         android:onClick="showCashier"
         android:text="@string/button_label_cashier"
         android:textColor="@android:color/background_dark"
+        android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="cashier"
-        android:textSize="32sp" />
+        tools:text="cashier" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
