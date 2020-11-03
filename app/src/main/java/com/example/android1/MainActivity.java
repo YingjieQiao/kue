@@ -67,28 +67,4 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-/*    public void showStats(View view) {
-        Log.d(LOG_TAG, "Stats Button clicked!");
-        Intent intent = new Intent(this, StatsActivity.class);
-        startActivity(intent);
-    }
-
-    public void showCook(View view) {
-        Log.d(LOG_TAG, "Cook Button clicked!");
-        Intent intent = new Intent(this, CookActivity.class);
-        startActivity(intent);
-    }
-
-    public void showSettings(View view) {
-        Log.d(LOG_TAG, "Settings Button clicked!");
-        Intent intent = new Intent(this, SettingsActivity.class);
-        startActivity(intent);
-    }
-
-    public void showCashier(View view) {
-        Log.d(LOG_TAG, "Cashier Button clicked!");
-        Intent intent = new Intent(this, CashierActivity.class);
-        startActivity(intent);
-    }*/
 }
