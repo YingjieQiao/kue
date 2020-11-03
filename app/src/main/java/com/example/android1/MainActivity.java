@@ -21,13 +21,54 @@ public class MainActivity extends AppCompatActivity {
         Button cookButton = findViewById(R.id.button_cook);
         Button settingsButton = findViewById(R.id.button_settings);
         Button cashierButton = findViewById(R.id.button_cashier);
-        statsButton.setOnClickListener(this::showStats);
-        cookButton.setOnClickListener(this::showCook);
-        settingsButton.setOnClickListener(this::showSettings);
-        cashierButton.setOnClickListener(this::showCashier);
+
+        statsButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Log.d(LOG_TAG, "Stats Button clicked!");
+                Intent intent = new Intent(MainActivity.this,
+                        StatsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        cookButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Log.d(LOG_TAG, "Cook Button clicked!");
+                Intent intent = new Intent(MainActivity.this,
+                        CookActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Log.d(LOG_TAG, "Settings Button clicked!");
+                Intent intent = new Intent(MainActivity.this,
+                        SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        cashierButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Log.d(LOG_TAG, "Cashier Button clicked!");
+                Intent intent = new Intent(MainActivity.this,
+                        CashierActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
-    public void showStats(View view) {
+/*    public void showStats(View view) {
         Log.d(LOG_TAG, "Stats Button clicked!");
         Intent intent = new Intent(this, StatsActivity.class);
         startActivity(intent);
@@ -49,5 +90,5 @@ public class MainActivity extends AppCompatActivity {
         Log.d(LOG_TAG, "Cashier Button clicked!");
         Intent intent = new Intent(this, CashierActivity.class);
         startActivity(intent);
-    }
+    }*/
 }
