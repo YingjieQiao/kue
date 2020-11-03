@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,6 +17,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Button statsButton = findViewById(R.id.button_statistics);
+        Button cookButton = findViewById(R.id.button_cook);
+        Button settingsButton = findViewById(R.id.button_settings);
+        Button cashierButton = findViewById(R.id.button_cashier);
+        statsButton.setOnClickListener(this::showStats);
+        cookButton.setOnClickListener(this::showCook);
+        settingsButton.setOnClickListener(this::showSettings);
+        cashierButton.setOnClickListener(this::showCashier);
     }
 
     public void showStats(View view) {
@@ -31,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showSettings(View view) {
+        Log.d(LOG_TAG, "Settings Button clicked!");
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
     }
 
     public void showCashier(View view) {
