@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "12190067463",
+    "firebase_url": "https://kueapp-722a3.firebaseio.com",
+    "project_id": "kueapp-722a3",
+    "storage_bucket": "kueapp-722a3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12190067463:android:e074c30bc25bbf3701f3a2",
+        "android_client_info": {
+          "package_name": "com.example.android1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "12190067463-ckulhn69c7fkf4r5ooiitc5rk8bjljf9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.android1",
+            "certificate_hash": "08ed7ceb239e6a843fddce1dbbb1ce45a0303920"
+          }
+        },
+        {
+          "client_id": "12190067463-dp6brm4vb041hblo13u3a0c5d1gvotur.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxK0FadCWyNCujvf47hx1JaSpmtgf_Qdc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "12190067463-dp6brm4vb041hblo13u3a0c5d1gvotur.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

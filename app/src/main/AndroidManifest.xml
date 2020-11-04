@@ -10,24 +10,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".StatsActivity"
-            android:label = "StatsActivity"
+        <activity android:name=".HomePageActivity"></activity>
+        <activity
+            android:name=".StatsActivity"
+            android:label="StatsActivity"
             android:parentActivityName=".MainActivity"
             tools:targetApi="jelly_bean">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android1.StatsActivity" />
         </activity>
-        <activity android:name=".CookActivity"
-            android:label = "CookActivity"
+        <activity
+            android:name=".CookActivity"
+            android:label="CookActivity"
             android:parentActivityName=".MainActivity"
             tools:targetApi="jelly_bean">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android1.CookActivity" />
         </activity>
-        <activity android:name=".CashierActivity"
-            android:label = "CashierActivity"
+        <activity
+            android:name=".CashierActivity"
+            android:label="CashierActivity"
             android:parentActivityName=".MainActivity"
             tools:targetApi="jelly_bean">
             <meta-data
