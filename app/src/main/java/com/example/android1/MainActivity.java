@@ -20,9 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Map;
 
 
-interface SimpleCallback<T> {
-    void callback(T data);
-}
+
 
 
 public class MainActivity extends AppCompatActivity {
@@ -66,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void checkPassword(String username, String password,
+    private void checkPassword(String username, String password,
                                        @NonNull SimpleCallback<Boolean> finishedCallback) {
         accounts.addValueEventListener(new ValueEventListener() {
             @Override
