@@ -27,7 +27,6 @@ interface SimpleCallback<T> {
 
 public class MainActivity extends AppCompatActivity {
 
-    public boolean login_success = false, async_done = false;
     private static final String LOG_TAG =
             MainActivity.class.getSimpleName();
     FirebaseDatabase database = FirebaseDatabase.getInstance();
