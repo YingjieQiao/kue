@@ -11,9 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.TaskCompletionSource;
-import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,8 +18,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
 
 
 interface SimpleCallback<T> {
@@ -44,13 +39,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-
         Button loginButton = findViewById(R.id.button_login);
         EditText username = findViewById(R.id.username);
         EditText password = findViewById(R.id.password);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 Log.d(LOG_TAG, "Login Button clicked!");
@@ -63,7 +56,8 @@ public class MainActivity extends AppCompatActivity {
                                         HomePageActivity.class);
                                 startActivity(intent);
                             } else {
-                                Toast.makeText(getApplicationContext(), "Wrong username or password",
+                                Toast.makeText(getApplicationContext(),
+                                        "Wrong username or password",
                                         Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -97,7 +91,5 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-
     }
 }
