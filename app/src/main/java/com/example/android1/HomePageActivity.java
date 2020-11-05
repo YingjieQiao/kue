@@ -16,7 +16,7 @@ public class HomePageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_home_page);
         Button statsButton = findViewById(R.id.button_statistics);
         Button cookButton = findViewById(R.id.button_cook);
         Button settingsButton = findViewById(R.id.button_settings);
