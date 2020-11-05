@@ -8,4 +8,9 @@
     <string name="button">Button</string>
     <string name="a_list_of_orders_and_clickable_done">A list of orders and clickable Done</string>
     <string name="graph_and_diagrams">graph and diagrams</string>
+    <string name="login">Login</string>
+    <string name="enter_email">Enter Name</string>
+    <string name="password">Password</string>
+    <string name="Login">login</string>
+    <string name="cancel">Cancel</string>
 </resources>
