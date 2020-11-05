@@ -11,6 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.TaskCompletionSource;
+import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -18,18 +21,29 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+
+
+interface SimpleCallback<T> {
+    void callback(T data);
+}
 
 
 public class MainActivity extends AppCompatActivity {
 
-    public boolean login_success = false;
+    public boolean login_success = false, async_done = false;
     private static final String LOG_TAG =
             MainActivity.class.getSimpleName();
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference accounts = database.getReference("accounts");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         Button loginButton = findViewById(R.id.button_login);
         EditText username = findViewById(R.id.username);
@@ -40,26 +54,28 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d(LOG_TAG, "Login Button clicked!");
-                if (checkPassword(username.getText().toString(),
-                        password.getText().toString())) {
-                    Intent intent = new Intent(MainActivity.this,
-                            HomePageActivity.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(getApplicationContext(), "Wrong username or password",
-                            Toast.LENGTH_SHORT).show();
+                    checkPassword(username.getText().toString(), password.getText().toString(),
+                            new SimpleCallback<Boolean>() {
+                        @Override
+                        public void callback(Boolean data) {
+                            if (data) {
+                                Intent intent = new Intent(MainActivity.this,
+                                        HomePageActivity.class);
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Wrong username or password",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
                 }
-
-            }
-        });
+            });
     }
 
 
-    private boolean checkPassword(String username, String password) {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference accounts = database.getReference("accounts");
-
-        accounts.addListenerForSingleValueEvent(new ValueEventListener() {
+    public void checkPassword(String username, String password,
+                                       @NonNull SimpleCallback<Boolean> finishedCallback) {
+        accounts.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ss : snapshot.getChildren()) {
@@ -69,19 +85,19 @@ public class MainActivity extends AppCompatActivity {
                     System.out.println(db_username.equals(username));
                     System.out.println(db_password.equals(password));
                     if (db_username.equals(username) && db_password.equals(password)) {
-                        login_success = true;
-                        break;
+                        finishedCallback.callback(true);
+                        return;
                     }
                 }
             }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
-        System.out.println("hello");
-        System.out.println(login_success);
-        return login_success;
+
+
     }
 }

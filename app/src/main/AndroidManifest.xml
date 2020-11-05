@@ -14,7 +14,7 @@
         <activity
             android:name=".StatsActivity"
             android:label="StatsActivity"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".HomePageActivity"
             tools:targetApi="jelly_bean">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -23,7 +23,7 @@
         <activity
             android:name=".CookActivity"
             android:label="CookActivity"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".HomePageActivity"
             tools:targetApi="jelly_bean">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -32,7 +32,16 @@
         <activity
             android:name=".CashierActivity"
             android:label="CashierActivity"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".HomePageActivity"
+            tools:targetApi="jelly_bean">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android1.CashierActivity" />
+        </activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="SettingsActivity"
+            android:parentActivityName=".HomePageActivity"
             tools:targetApi="jelly_bean">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
