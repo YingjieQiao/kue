@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d(LOG_TAG, "Login Button clicked!");
                     checkPassword(username.getText().toString(), password.getText().toString(),
-                            new SimpleCallback<Boolean>() {
+                            new CompareValueCallback<Boolean>() {
                         @Override
                         public void callback(Boolean data) {
                             if (data) {
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void checkPassword(String username, String password,
-                                       @NonNull SimpleCallback<Boolean> finishedCallback) {
+                                       @NonNull CompareValueCallback<Boolean> finishedCallback) {
         accounts.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -73,8 +73,8 @@ public class MainActivity extends AppCompatActivity {
                     Map<String, Object> each_restaurant = (Map<String, Object>) ss.getValue();
                     String db_username = (String) each_restaurant.get("email");
                     String db_password = (String) each_restaurant.get("password");
-                    System.out.println(db_username.equals(username));
-                    System.out.println(db_password.equals(password));
+                    //System.out.println(db_username.equals(username));
+                    //System.out.println(db_password.equals(password));
                     if (db_username.equals(username) && db_password.equals(password)) {
                         finishedCallback.callback(true);
                         return;

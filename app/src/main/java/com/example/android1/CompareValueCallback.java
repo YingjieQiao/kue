@@ -1,5 +1,5 @@
 package com.example.android1;
 
-public interface SimpleCallback<T> {
+public interface CompareValueCallback<T> {
     void callback(T data);
 }
