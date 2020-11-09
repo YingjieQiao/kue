@@ -36,9 +36,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+<<<<<<< Updated upstream
         Button loginButton = findViewById(R.id.button_login);
         EditText username = findViewById(R.id.username);
         EditText password = findViewById(R.id.password);
+=======
+    public void showCook(View view) {
+        Log.d(LOG_TAG, "Cook Button clicked!");//When the cook button is clicked this will send out a log message
+        Intent intent = new Intent(this, CookActivity.class);
+        startActivity(intent);
+    }
+>>>>>>> Stashed changes
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
