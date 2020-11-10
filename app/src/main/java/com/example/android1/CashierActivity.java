@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,14 +29,22 @@ public class CashierActivity extends AppCompatActivity {
         submitbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CashierActivity.this,StatsActivity.class);
-                intent.putExtra("Chickenrice",chickenricenumber + "Chicken Rice");
-                intent.putExtra("duckricenumber",duckricenumber+" Duck Rice");
-                intent.putExtra("satayricenumber",sataynumber + " Satay");
-                intent.putExtra("Cost",total_cost);
-                startActivity(intent);
 
-            }
+/*        Intent intent = new Intent(CashierActivity.this,StatsActivity.class);
+        intent.putExtra("Chickenrice",chickenricenumber + "Chicken Rice");
+        intent.putExtra("duckricenumber",duckricenumber+" Duck Rice");
+        intent.putExtra("satayricenumber",sataynumber + " Satay");
+        intent.putExtra("Cost",total_cost);
+        startActivity(intent);*/
+        if(chickenricenumber.getText().toString().equals("0") && duckricenumber.getText().toString().equals("0")&&sataynumber.getText().toString().equals("0")){
+            Toast.makeText(CashierActivity.this,"no Order",Toast.LENGTH_SHORT).show();
+        }else{
+        chickenricenumber.setText("0");
+        duckricenumber.setText("0");
+        sataynumber.setText("0");
+        Toast.makeText(CashierActivity.this,"Order Submitted",Toast.LENGTH_SHORT).show();
+
+            }}
         });
     }
 
