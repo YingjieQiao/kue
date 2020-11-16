@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,8 +26,12 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String LOG_TAG =
-            MainActivity.class.getSimpleName();
+    private static final String LOG_TAG = MainActivity.class.getSimpleName();
+    private String sharedPrefFile = "com.example.android1.mainsharedprefs";
+    SharedPreferences mPreferences;
+    private static String USER = "default"; // the current user logged in the app
+    private static DataSnapshot DB;
+
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference accounts = database.getReference("accounts");
 
@@ -35,8 +40,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
 
-        Button loginButton = findViewById(R.id.button_login);
+        Button loginButton = findViewById(R.id.button_cash);
         EditText username = findViewById(R.id.username);
         EditText password = findViewById(R.id.password);
 
@@ -44,11 +50,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d(LOG_TAG, "Login Button clicked!");
-                    checkPassword(username.getText().toString(), password.getText().toString(),
+                SharedPreferences.Editor preferencesEditor = mPreferences.edit();
+                preferencesEditor.putString(USER, username.getText().toString());
+                preferencesEditor.apply();
+                checkPassword(username.getText().toString(), password.getText().toString(),
                             new CompareValueCallback<Boolean>() {
                         @Override
                         public void callback(Boolean data) {
                             if (data) {
+                                Utils.generate_db_key(mPreferences);
                                 Intent intent = new Intent(MainActivity.this,
                                         HomePageActivity.class);
                                 startActivity(intent);
@@ -69,8 +79,8 @@ public class MainActivity extends AppCompatActivity {
         accounts.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot ss : snapshot.getChildren()) {
-                    Map<String, Object> each_restaurant = (Map<String, Object>) ss.getValue();
+                for (DataSnapshot db : snapshot.getChildren()) {
+                    Map<String, Object> each_restaurant = (Map<String, Object>) db.getValue();
                     String db_username = (String) each_restaurant.get("email");
                     String db_password = (String) each_restaurant.get("password");
                     //System.out.println(db_username.equals(username));
