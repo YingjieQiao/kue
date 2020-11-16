@@ -16,6 +16,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class CashierActivity extends AppCompatActivity {
@@ -23,7 +25,6 @@ public class CashierActivity extends AppCompatActivity {
             HomePageActivity.class.getSimpleName();
     private String sharedPrefFile = "com.example.android1.mainsharedprefs";
     SharedPreferences mPreferences;
-    public static String USER; // the current user logged in the app
     public static String DB_KEY_USERNAME; // the child in firebase to query from
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -45,18 +46,15 @@ public class CashierActivity extends AppCompatActivity {
                 String db_key_username = mPreferences.getString(DB_KEY_USERNAME, "ERROR");
                 DatabaseReference restaurant_db = database.getReference("accounts")
                         .child(db_key_username);
-                HashMap<String, Object> hmap = new HashMap<>();
                 ArrayList<String> food = new ArrayList<>();
-                food.add("pasta");
-                food.add("coffee");
+                food.add("DoubleCheeseBurger");
+                food.add("ExtraSugarCode");
                 food.add("50002");
-                hmap.put("Food", food);
-                // use nay data structure as you see fit
 
-                hmap.put("OrderTime", System.currentTimeMillis());
-                hmap.put("FinishTime", -1); // Cook page will update FinishTime
-
-                restaurant_db.child("orders").push().setValue(hmap);
+                DateFormat df = new SimpleDateFormat("dd/MM/yy");
+                Date dateobj = new Date();
+                Order order = new Order(food, System.currentTimeMillis(), -1, df.format(dateobj));
+                restaurant_db.child("orders").push().setValue(order);
             }
         });
     }
