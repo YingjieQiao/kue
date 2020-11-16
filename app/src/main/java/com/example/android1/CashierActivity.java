@@ -16,8 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class CashierActivity extends AppCompatActivity {
     private static final String LOG_TAG =
@@ -47,8 +46,16 @@ public class CashierActivity extends AppCompatActivity {
                 DatabaseReference restaurant_db = database.getReference("accounts")
                         .child(db_key_username);
                 HashMap<String, Object> hmap = new HashMap<>();
-                hmap.put("Food", "pasta");
+                ArrayList<String> food = new ArrayList<>();
+                food.add("pasta");
+                food.add("coffee");
+                food.add("50002");
+                hmap.put("Food", food);
+                // use nay data structure as you see fit
+
                 hmap.put("OrderTime", System.currentTimeMillis());
+                hmap.put("FinishTime", -1); // Cook page will update FinishTime
+
                 restaurant_db.child("orders").push().setValue(hmap);
             }
         });
