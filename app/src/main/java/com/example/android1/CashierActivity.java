@@ -35,7 +35,7 @@ public class CashierActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_cashier);
         TextView chickenricenumber = findViewById(R.id.integer_number);
         TextView duckricenumber = findViewById(R.id.integer_number_2);
         TextView sataynumber = findViewById(R.id.integer_number_3);

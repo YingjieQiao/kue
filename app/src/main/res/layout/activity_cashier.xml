@@ -175,17 +175,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/total_cost" />
 
-    <!--    <Button-->
-    <!--        android:id="@+id/submitbutton"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginStart="84dp"-->
-    <!--        android:layout_marginLeft="84dp"-->
-    <!--        android:layout_marginTop="640dp"-->
-    <!--        android:onClick="Submittodatabase"-->
-    <!--        android:text="@string/submit"-->
-
-    <!--        app:layout_constraintStart_toEndOf="@+id/total_cost"-->
-    <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
