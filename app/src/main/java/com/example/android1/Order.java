@@ -8,6 +8,16 @@ public class Order {
     Integer FinishTime;
     String OrderDate;
 
+    public boolean isDisplayed() {
+        return Displayed;
+    }
+
+    public void setDisplayed(boolean displayed) {
+        Displayed = displayed;
+    }
+
+    boolean Displayed;
+
     public Order() {}  // Needed for Firebase
 
     public void setFood(ArrayList<String> food) {
@@ -42,10 +52,12 @@ public class Order {
         return OrderDate;
     }
 
-    public Order(ArrayList<String> food, Long orderTime, Integer finishTime, String orderDate) {
+    public Order(ArrayList<String> food, Long orderTime, Integer finishTime,
+                 String orderDate, boolean displayed) {
         Food = food;
         OrderTime = orderTime;
         FinishTime = finishTime;
         OrderDate = orderDate;
+        Displayed = displayed;
     }
 }
