@@ -48,14 +48,20 @@ public class OrderHolder extends RecyclerView.ViewHolder {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    orders.addValueEventListener(new ValueEventListener() {
+                    orders.addListenerForSingleValueEvent(new ValueEventListener() {
 
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             for (DataSnapshot order : snapshot.getChildren()) {
-                                Map<Object, Object> each_order = (Map<Object, Object>) order.getValue();
-                                String ordertime = (String) each_order.get("OrderTime");
-                                System.out.println(ordertime);
+                                System.out.println(order.child("orderID").getValue());
+                                if (orderId.equals((Long) order.child("orderID").getValue())) {
+                                    String postKey = order.getRef().getKey();
+                                    //Long value = (Long) order.child("finishTime").getValue();
+                                    assert postKey != null;
+                                    orders.child(postKey).child("finishTime").setValue(System.currentTimeMillis());
+                                    //System.out.println("done");
+                                }
+
                             }
 
                         }
@@ -73,7 +79,7 @@ public class OrderHolder extends RecyclerView.ViewHolder {
 
 
     void setOrder_(Order order) {
-        Integer finishTime_content = order.getFinishTime();
+        Long finishTime_content = order.getFinishTime();
 
         if (finishTime_content == -1) setOrder(order);
     }

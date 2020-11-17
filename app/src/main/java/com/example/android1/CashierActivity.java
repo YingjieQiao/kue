@@ -53,7 +53,7 @@ public class CashierActivity extends AppCompatActivity {
 
                 DateFormat df = new SimpleDateFormat("dd/MM/yy");
                 Date dateobj = new Date();
-                Order order = new Order(food, System.currentTimeMillis(), -1,
+                Order order = new Order(food, System.currentTimeMillis(), (long) -1,
                         df.format(dateobj), false, System.currentTimeMillis()/2);
                 restaurant_db.child("orders").push().setValue(order);
             }

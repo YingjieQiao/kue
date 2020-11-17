@@ -5,7 +5,7 @@ import java.util.*;
 public class Order {
     ArrayList<String> Food;
     Long OrderTime;
-    Integer FinishTime;
+    Long FinishTime;
     String OrderDate;
     boolean Displayed;
     Long OrderID;
@@ -36,7 +36,7 @@ public class Order {
         OrderTime = orderTime;
     }
 
-    public void setFinishTime(Integer finishTime) {
+    public void setFinishTime(Long finishTime) {
         FinishTime = finishTime;
     }
 
@@ -52,7 +52,7 @@ public class Order {
         return OrderTime;
     }
 
-    public Integer getFinishTime() {
+    public Long getFinishTime() {
         return FinishTime;
     }
 
@@ -60,7 +60,7 @@ public class Order {
         return OrderDate;
     }
 
-    public Order(ArrayList<String> food, Long orderTime, Integer finishTime,
+    public Order(ArrayList<String> food, Long orderTime, Long finishTime,
                  String orderDate, boolean displayed, Long id) {
         Food = food;
         OrderTime = orderTime;
