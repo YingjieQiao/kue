@@ -67,6 +67,7 @@ public class Order {
     public Order(HashMap<String,String> food, Long orderTime, Long finishTime,
 
                  String orderDate, boolean displayed, Long id) {
+
         Food = food;
         OrderTime = orderTime;
         FinishTime = finishTime;
