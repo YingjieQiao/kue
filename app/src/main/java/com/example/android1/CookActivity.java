@@ -27,9 +27,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CookActivity extends AppCompatActivity {
@@ -42,10 +40,9 @@ public class CookActivity extends AppCompatActivity {
     private String sharedPrefFile = "com.example.android1.mainsharedprefs";
     SharedPreferences mPreferences;
     public static String DB_KEY_USERNAME; // the child in firebase to query from
-    String db_key_username;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    ArrayList<Order> list;
-    OrderAdapter adapter;
+
+    FirebaseRecyclerAdapter adapter;
 
 
     @Override
@@ -56,31 +53,50 @@ public class CookActivity extends AppCompatActivity {
         contextOfApplication = getApplicationContext();
 
         mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
-        db_key_username = mPreferences.getString(DB_KEY_USERNAME, "ERROR");
+        String db_key_username = mPreferences.getString(DB_KEY_USERNAME, "ERROR");
+        Query orders = database.getReference().child("/accounts/"+db_key_username+"/orders");
+        System.out.println(orders);
         RecyclerView recyclerView = findViewById(R.id.cook_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter = getAdapter();
+        FirebaseRecyclerOptions<Order> firebaseRecyclerOptions = new FirebaseRecyclerOptions.Builder<Order>()
+                .setQuery(orders, Order.class)
+                .build();
+        adapter = new FirebaseRecyclerAdapter<Order, OrderHolder>(firebaseRecyclerOptions) {
+
+            @NonNull
+            @Override
+            public OrderHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(
+                        R.layout.cardview_orders, parent, false);
+
+                Log.i("ADAPTER", "Order onCreateViewHolder is called");
+                return new OrderHolder(view);
+            }
+
+            @Override
+            protected void onBindViewHolder(@NonNull OrderHolder holder, int position, @NonNull Order model) {
+                Log.i("ADAPTER", "Order onBindViewHolder is called");
+                holder.setOrder(model);
+                holder.setId(model.getOrderID());
+            }
+        };
         recyclerView.setAdapter(adapter);
     }
 
 
-    private OrderAdapter getAdapter() {
-        DatabaseReference mRef = database.getReference("/accounts/"+db_key_username+"/orders");
-        mRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                list = new ArrayList<>();
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    System.out.println(dataSnapshot.getChi);
-                }
-            }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        adapter.startListening();
+    }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
-        return adapter;
-    };
+    @Override
+    protected void onStop() {
+        super.onStop();
+        adapter.stopListening();
+    }
+
+
 }
