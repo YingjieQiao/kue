@@ -6,8 +6,18 @@ public class Order {
     HashMap<String,String> Food;
 
     Long OrderTime;
-    Integer FinishTime;
+    Long FinishTime;
     String OrderDate;
+    boolean Displayed;
+    Long OrderID;
+
+    public Long getOrderID() {
+        return OrderID;
+    }
+
+    public void setOrderID(Long orderID) {
+        OrderID = orderID;
+    }
 
     public boolean isDisplayed() {
         return Displayed;
@@ -16,8 +26,6 @@ public class Order {
     public void setDisplayed(boolean displayed) {
         Displayed = displayed;
     }
-
-    boolean Displayed;
 
     public Order() {}  // Needed for Firebase
 
@@ -30,7 +38,7 @@ public class Order {
         OrderTime = orderTime;
     }
 
-    public void setFinishTime(Integer finishTime) {
+    public void setFinishTime(Long finishTime) {
         FinishTime = finishTime;
     }
 
@@ -47,7 +55,7 @@ public class Order {
         return OrderTime;
     }
 
-    public Integer getFinishTime() {
+    public Long getFinishTime() {
         return FinishTime;
     }
 
@@ -55,14 +63,17 @@ public class Order {
         return OrderDate;
     }
 
-    public Order(HashMap<String,String> food, Long orderTime, Integer finishTime,
 
-                 String orderDate, boolean displayed) {
+    public Order(HashMap<String,String> food, Long orderTime, Long finishTime,
+
+                 String orderDate, boolean displayed, Long id) {
+
         Food = food;
         OrderTime = orderTime;
         FinishTime = finishTime;
         OrderDate = orderDate;
         Displayed = displayed;
+        OrderID = id;
     }
 }
 

@@ -7,6 +7,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,13 +31,17 @@ import com.google.firebase.database.Query;
 import java.util.HashMap;
 
 public class CookActivity extends AppCompatActivity {
-    private static final String LOG_TAG =
-            HomePageActivity.class.getSimpleName();
+    public static Context getContextOfApplication() {
+        return contextOfApplication;
+    }
+
+    public static Context contextOfApplication;
+
     private String sharedPrefFile = "com.example.android1.mainsharedprefs";
     SharedPreferences mPreferences;
     public static String DB_KEY_USERNAME; // the child in firebase to query from
-
     FirebaseDatabase database = FirebaseDatabase.getInstance();
+
     FirebaseRecyclerAdapter adapter;
 
 
@@ -45,14 +50,15 @@ public class CookActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cook);
         LinearLayout cookLayout = findViewById(R.id.cookLayout);
+        contextOfApplication = getApplicationContext();
 
         mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
         String db_key_username = mPreferences.getString(DB_KEY_USERNAME, "ERROR");
-        Query orders =  database.getReference("accounts")
-                .child(db_key_username).child("orders");
-
+        Query orders = database.getReference().child("/accounts/"+db_key_username+"/orders");
+        System.out.println(orders);
         RecyclerView recyclerView = findViewById(R.id.cook_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         FirebaseRecyclerOptions<Order> firebaseRecyclerOptions = new FirebaseRecyclerOptions.Builder<Order>()
                 .setQuery(orders, Order.class)
                 .build();
@@ -72,19 +78,10 @@ public class CookActivity extends AppCompatActivity {
             protected void onBindViewHolder(@NonNull OrderHolder holder, int position, @NonNull Order model) {
                 Log.i("ADAPTER", "Order onBindViewHolder is called");
                 holder.setOrder(model);
+                holder.setId(model.getOrderID());
             }
         };
         recyclerView.setAdapter(adapter);
-
-
-
-
-        /*for(int i=0;i<4;i++) {
-            CheckBox btn = new CheckBox(this);
-            l.addView(btn);
-            btn.setText("hello");
-        }*/
-
     }
 
 
@@ -102,16 +99,4 @@ public class CookActivity extends AppCompatActivity {
     }
 
 
-    public void createCheckBox(LinearLayout cookLayout) {
-        CheckBox checkBox = new CheckBox(CookActivity.this);
-        System.out.println("checkbox instantiated");
-        /*HashMap<String, Object> new_order = (HashMap<String, Object>) snapshot.getValue();
-        StringBuilder order_content = new StringBuilder();
-        for (String key : new_order.keySet()) {
-            order_content.append(key + new_order.get(key).toString() + "\n");
-        }
-        checkBox.setText(order_content);*/
-        cookLayout.addView(checkBox);
-        System.out.println("checkbox added");
-    }
 }
