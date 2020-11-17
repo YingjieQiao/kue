@@ -1,27 +1,102 @@
 package com.example.android1;
 
+import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class OrderHolder extends RecyclerView.ViewHolder {
-    ArrayList<String> Food;
-    Long OrderTime;
-    Integer FinishTime;
-    String OrderDate;
+    private String sharedPrefFile = "com.example.android1.mainsharedprefs";
+    SharedPreferences mPreferences = CookActivity.getContextOfApplication().
+            getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
+    public static String DB_KEY_USERNAME; // the child in firebase to query from
+    String db_key_username = mPreferences.getString(DB_KEY_USERNAME, "ERROR");
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference orders =  database.getReference("accounts")
+            .child(db_key_username).child("orders");
+
+    View mView;
+    TextView textViewOrder;
+    TextView textViewTime;
+    CheckBox checkBoxFinished;
+    Long orderId;
 
     public OrderHolder(@NonNull View itemView) {
         super(itemView);
+        mView = itemView;
+        textViewOrder = mView.findViewById(R.id.cardView_order_item);
+        textViewTime = mView.findViewById(R.id.cardView_time_of_ordering);
+        checkBoxFinished = mView.findViewById(R.id.checkBox_finished);
+        checkBoxFinished.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    orders.addValueEventListener(new ValueEventListener() {
+
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot order : snapshot.getChildren()) {
+                                Map<Object, Object> each_order = (Map<Object, Object>) order.getValue();
+                                String ordertime = (String) each_order.get("OrderTime");
+                                System.out.println(ordertime);
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+                }
+            }
+        });
+    }
+
+
+    void setOrder_(Order order) {
+        Integer finishTime_content = order.getFinishTime();
+
+        if (finishTime_content == -1) setOrder(order);
     }
 
 
     void setOrder(Order order) {
-        String Food_content = order.getFood().toString();
-        String OrderTime_content = order.getOrderTime().toString();
-        String FinishTime_content = order.getFinishTime().toString();
-        String OrderDate_content = order.getOrderDate().toString();
+        String food_content = order.getFood().toString();
+        System.out.println(order.getFood());
+        Long orderTime_content = order.getOrderTime();
+        String orderDate_content = order.getOrderDate();
+
+        textViewOrder.setText(food_content);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm:ss");
+        Date date = new Date(orderTime_content);
+        String orderTime = simpleDateFormat.format(date);
+        String dateTime = orderDate_content + "   " +orderTime;
+        textViewTime.setText(dateTime);
+        Log.i("ORDER_HOLDER", "An order is added to cook page");
+    }
+
+
+    void setId(Long id){
+        this.orderId = id;
+        Log.i("ORDER_HOLDER", "ORDER ID: " + id);
     }
 }

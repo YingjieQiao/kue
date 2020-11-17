@@ -25,7 +25,7 @@
             android:text="Finished" />
 
         <TextView
-            android:id="@+id/cardView_food_item"
+            android:id="@+id/cardView_order_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView

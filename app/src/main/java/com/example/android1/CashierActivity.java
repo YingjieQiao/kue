@@ -45,7 +45,7 @@ public class CashierActivity extends AppCompatActivity {
 
                 String db_key_username = mPreferences.getString(DB_KEY_USERNAME, "ERROR");
                 DatabaseReference restaurant_db = database.getReference("accounts")
-                        .child(db_key_username);
+                        .child(db_key_username).child("orders");
                 ArrayList<String> food = new ArrayList<>();
                 food.add("DoubleCheeseBurger");
                 food.add("ExtraSugarCode");
@@ -53,9 +53,10 @@ public class CashierActivity extends AppCompatActivity {
 
                 DateFormat df = new SimpleDateFormat("dd/MM/yy");
                 Date dateobj = new Date();
+                Long id = System.currentTimeMillis()/2;
                 Order order = new Order(food, System.currentTimeMillis(), -1,
-                        df.format(dateobj), false);
-                restaurant_db.child("orders").push().setValue(order);
+                        df.format(dateobj), false, id);
+                restaurant_db.child(id.toString()).push().setValue(order);
             }
         });
     }

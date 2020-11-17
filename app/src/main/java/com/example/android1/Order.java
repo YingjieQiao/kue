@@ -7,6 +7,16 @@ public class Order {
     Long OrderTime;
     Integer FinishTime;
     String OrderDate;
+    boolean Displayed;
+    Long OrderID;
+
+    public Long getOrderID() {
+        return OrderID;
+    }
+
+    public void setOrderID(Long orderID) {
+        OrderID = orderID;
+    }
 
     public boolean isDisplayed() {
         return Displayed;
@@ -15,8 +25,6 @@ public class Order {
     public void setDisplayed(boolean displayed) {
         Displayed = displayed;
     }
-
-    boolean Displayed;
 
     public Order() {}  // Needed for Firebase
 
@@ -53,11 +61,12 @@ public class Order {
     }
 
     public Order(ArrayList<String> food, Long orderTime, Integer finishTime,
-                 String orderDate, boolean displayed) {
+                 String orderDate, boolean displayed, Long id) {
         Food = food;
         OrderTime = orderTime;
         FinishTime = finishTime;
         OrderDate = orderDate;
         Displayed = displayed;
+        OrderID = id;
     }
 }
