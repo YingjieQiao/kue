@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -53,9 +54,12 @@ public class CashierActivity extends AppCompatActivity {
 
                 DateFormat df = new SimpleDateFormat("dd/MM/yy");
                 Date dateobj = new Date();
+                Long receiptid = System.currentTimeMillis()/2;
                 Order order = new Order(food, System.currentTimeMillis(), (long) -1,
-                        df.format(dateobj), false, System.currentTimeMillis()/2);
+                        df.format(dateobj), false, receiptid);
                 restaurant_db.child("orders").push().setValue(order);
+                Toast.makeText(CashierActivity.this,"Order " + receiptid + " has been submitted", Toast.LENGTH_SHORT).show();
+
             }
         });
     }

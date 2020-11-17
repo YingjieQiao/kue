@@ -3,7 +3,8 @@ package com.example.android1;
 import java.util.*;
 
 public class Order {
-    ArrayList<String> Food;
+    HashMap<String,String> Food;
+
     Long OrderTime;
     Long FinishTime;
     String OrderDate;
@@ -28,7 +29,8 @@ public class Order {
 
     public Order() {}  // Needed for Firebase
 
-    public void setFood(ArrayList<String> food) {
+    public void setFood(HashMap<String, String> food) {
+
         Food = food;
     }
 
@@ -44,7 +46,8 @@ public class Order {
         OrderDate = orderDate;
     }
 
-    public ArrayList<String> getFood() {
+    public HashMap<String,String> getFood() {
+
         return Food;
     }
 
@@ -60,7 +63,9 @@ public class Order {
         return OrderDate;
     }
 
-    public Order(ArrayList<String> food, Long orderTime, Long finishTime,
+
+    public Order(HashMap<String,String> food, Long orderTime, Long finishTime,
+
                  String orderDate, boolean displayed, Long id) {
         Food = food;
         OrderTime = orderTime;
@@ -70,3 +75,4 @@ public class Order {
         OrderID = id;
     }
 }
+
