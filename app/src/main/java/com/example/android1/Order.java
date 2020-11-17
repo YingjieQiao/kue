@@ -9,13 +9,13 @@ public class Order {
     Long FinishTime;
     String OrderDate;
     boolean Displayed;
-    Long OrderID;
+    String OrderID;
 
-    public Long getOrderID() {
+    public String getOrderID() {
         return OrderID;
     }
 
-    public void setOrderID(Long orderID) {
+    public void setOrderID(String orderID) {
         OrderID = orderID;
     }
 
@@ -66,7 +66,7 @@ public class Order {
 
     public Order(HashMap<String,String> food, Long orderTime, Long finishTime,
 
-                 String orderDate, boolean displayed, Long id) {
+                 String orderDate, boolean displayed, String id) {
 
         Food = food;
         OrderTime = orderTime;

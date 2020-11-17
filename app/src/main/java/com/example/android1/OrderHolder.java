@@ -36,7 +36,7 @@ public class OrderHolder extends RecyclerView.ViewHolder {
     TextView textViewOrder;
     TextView textViewTime;
     CheckBox checkBoxFinished;
-    Long orderId;
+    String orderId;
 
     public OrderHolder(@NonNull View itemView) {
         super(itemView);
@@ -54,7 +54,7 @@ public class OrderHolder extends RecyclerView.ViewHolder {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             for (DataSnapshot order : snapshot.getChildren()) {
                                 System.out.println(order.child("orderID").getValue());
-                                if (orderId.equals((Long) order.child("orderID").getValue())) {
+                                if (orderId.equals(order.child("orderID").getValue())) {
                                     String postKey = order.getRef().getKey();
                                     //Long value = (Long) order.child("finishTime").getValue();
                                     assert postKey != null;
@@ -101,7 +101,7 @@ public class OrderHolder extends RecyclerView.ViewHolder {
     }
 
 
-    void setId(Long id){
+    void setId(String id){
         this.orderId = id;
         Log.i("ORDER_HOLDER", "ORDER ID: " + id);
     }
