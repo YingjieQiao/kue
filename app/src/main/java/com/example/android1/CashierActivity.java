@@ -1,6 +1,5 @@
 package com.example.android1;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,7 +13,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Date;
 import java.util.HashMap;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.UUID;
 
 public class CashierActivity extends AppCompatActivity {
     int count=0;
@@ -41,12 +44,29 @@ public class CashierActivity extends AppCompatActivity {
         TextView sataynumber = findViewById(R.id.integer_number_3);
         TextView totalcost = findViewById(R.id.totalcostvalue);
         Button submitbutton = findViewById(R.id.submitbutton);
+        mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
+
         submitbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseReference restaurant_db = db.getReference("accounts");
-                Orders order=new Orders("Order " + numberoforders,chickenricenumber.getText().toString(),duckricenumber.getText().toString(),sataynumber.getText().toString(),totalcost.getText().toString());
-                restaurant_db.child("orders").push().setValue(order);
+                Log.i(TAG,"Order submitted");
+                String db_key_username = mPreferences.getString(DB_KEY_USERNAME, "ERROR");
+                DatabaseReference restaurant_db = db.getReference("accounts").child(db_key_username);//getting the path towards where to place the data
+                HashMap<String, String> foodorder = new HashMap<String,String>();
+                String receiptid = UUID.randomUUID().toString();//this will generate a random uuid for the receipt order
+                foodorder.put("ChickenRice",chickenricenumber.getText().toString());
+                foodorder.put("DuckRice",duckricenumber.getText().toString());
+                foodorder.put("Satay",sataynumber.getText().toString());
+                foodorder.put("TotalCost",totalcost.getText().toString());
+                foodorder.put("receiptorder",receiptid);
+                DateFormat df = new SimpleDateFormat("dd/MM/yy");
+                Date dateobj = new Date();
+                Order order = new Order(foodorder   , System.currentTimeMillis(), -1,
+                        df.format(dateobj), false);
+                restaurant_db.child("orders").push().setValue(foodorder);
+                Toast.makeText(CashierActivity.this,"Order " + receiptid + " has been submitted", Toast.LENGTH_SHORT).show();
+
+
             }
         });
     }
@@ -133,19 +153,4 @@ public class CashierActivity extends AppCompatActivity {
         displayInteger.setText(""+number);
     }
 
-
-/*    public void Submittodatabase(View view) {
-        TextView displayInteger=findViewById(R.id.totalcostvalue);
-        TextView displaychickenrice = findViewById(R.id.integer_number);
-        TextView displayduckrice = findViewById(R.id.integer_number_2);
-        TextView displaysatay = findViewById(R.id.integer_number_3);
-        displaychickenrice.setText(0);
-        displayduckrice.setText(0);
-        displaysatay.setText(0);
-        displayInteger.display_4(double
-        )
-//        count=0;*/
-//        count_2=0;
-//        count_3=0;
-//        total_cost=0;
 }

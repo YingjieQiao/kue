@@ -90,9 +90,9 @@
     <TextView
         android:layout_width="80dp"
         android:layout_height="15dp"
-        android:layout_marginTop="168dp"
-        android:layout_marginEnd="68dp"
-        android:layout_marginRight="68dp"
+        android:layout_marginTop="148dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="60dp"
         android:text="@string/duck_rice"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
