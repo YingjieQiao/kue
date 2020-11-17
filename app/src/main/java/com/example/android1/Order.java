@@ -4,6 +4,7 @@ import java.util.*;
 
 public class Order {
     HashMap<String,String> Food;
+
     Long OrderTime;
     Integer FinishTime;
     String OrderDate;
@@ -21,6 +22,7 @@ public class Order {
     public Order() {}  // Needed for Firebase
 
     public void setFood(HashMap<String, String> food) {
+
         Food = food;
     }
 
@@ -37,6 +39,7 @@ public class Order {
     }
 
     public HashMap<String,String> getFood() {
+
         return Food;
     }
 
@@ -53,6 +56,7 @@ public class Order {
     }
 
     public Order(HashMap<String,String> food, Long orderTime, Integer finishTime,
+
                  String orderDate, boolean displayed) {
         Food = food;
         OrderTime = orderTime;
@@ -61,3 +65,4 @@ public class Order {
         Displayed = displayed;
     }
 }
+

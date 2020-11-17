@@ -35,6 +35,7 @@ public class CashierActivity extends AppCompatActivity {
     public static String USER; // the current user logged in the app
     public static String DB_KEY_USERNAME; // the child in firebase to query from
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +66,7 @@ public class CashierActivity extends AppCompatActivity {
                         df.format(dateobj), false);
                 restaurant_db.child("orders").push().setValue(foodorder);
                 Toast.makeText(CashierActivity.this,"Order " + receiptid + " has been submitted", Toast.LENGTH_SHORT).show();
+
 
 
             }
