@@ -13,5 +13,15 @@
     <string name="password">Password</string>
     <string name="Login">login</string>
     <string name="cancel">Cancel</string>
-    <string name="cook_great_food">Cook Great Food</string>
+    <string name="plussign">+</string>
+    <string name="minussign">-</string>
+    <string name="chicken_rice">ChickenRice</string>
+    <string name="display_number">0</string>
+    <string name="duck_rice">Duck Rice</string>
+    <string name="Satay">Satay</string>
+    <string name="total_order">Total Order</string>
+    <string name="Totalcost">Total Cost</string>
+    <string name="submit">Submit</string>
+
+
 </resources>
