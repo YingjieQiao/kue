@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void checkPassword(String username, String password,
                                        @NonNull CompareValueCallback<Boolean> finishedCallback) {
-        accounts.addValueEventListener(new ValueEventListener() {
+        accounts.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot db : snapshot.getChildren()) {
