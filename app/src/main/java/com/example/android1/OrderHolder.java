@@ -33,6 +33,8 @@ public class OrderHolder extends RecyclerView.ViewHolder {
             .child(db_key_username).child("orders");
     DatabaseReference order_stats =  database.getReference("accounts")
             .child(db_key_username).child("order_stats");
+    DatabaseReference order_web =  database.getReference("accounts")
+            .child(db_key_username).child("order_web");
 
     View mView;
     TextView textViewOrder;
@@ -50,26 +52,41 @@ public class OrderHolder extends RecyclerView.ViewHolder {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
+
+
+                    order_web.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot order : snapshot.getChildren()) {
+                                //System.out.println(order.child("orderID").getValue());
+                                if (orderId.equals(order.child("orderID").getValue())) {
+                                    String postKey = order.getRef().getKey();
+                                    //Long value = (Long) order.child("finishTime").getValue();
+                                    assert postKey != null;
+                                    order_web.child(postKey).child("finishTime").setValue(System.currentTimeMillis());
+
+                                    Order orderFinished = order.getValue(Order.class);
+                                    order_stats.push().setValue(orderFinished);
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+
                     orders.addListenerForSingleValueEvent(new ValueEventListener() {
 
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             for (DataSnapshot order : snapshot.getChildren()) {
-                                System.out.println(order.child("orderID").getValue());
                                 if (orderId.equals(order.child("orderID").getValue())) {
-                                    /*String postKey = order.getRef().getKey();
-                                    //Long value = (Long) order.child("finishTime").getValue();
-                                    assert postKey != null;
-                                    orders.child(postKey).child("finishTime").setValue(System.currentTimeMillis());
-                                    //System.out.println("done");*/
                                     order.getRef().removeValue();
-                                    Order orderFinished = order.getValue(Order.class);
-                                    order_stats.push().setValue(orderFinished);
-                                    //TODO: update order_status for web
                                 }
-
                             }
-
                         }
 
                         @Override
