@@ -66,11 +66,10 @@ public class CashierActivity extends AppCompatActivity {
                 Date dateobj = new Date();
 
                 Order order = new Order(foodorder, System.currentTimeMillis(), (long) -1,
-                        df.format(dateobj), false, receiptid);
+                        df.format(dateobj), receiptid);
                 restaurant_db.child("orders").push().setValue(order);
+                restaurant_db.child("order_web").push().setValue(order);
                 Toast.makeText(CashierActivity.this,"Order " + receiptid + " has been submitted", Toast.LENGTH_SHORT).show();
-                //TODO: push to a 3rd table order_status for web
-
             }
         });
     }
