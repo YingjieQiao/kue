@@ -69,7 +69,7 @@ public class CashierActivity extends AppCompatActivity {
                         df.format(dateobj), false, receiptid);
                 restaurant_db.child("orders").push().setValue(order);
                 Toast.makeText(CashierActivity.this,"Order " + receiptid + " has been submitted", Toast.LENGTH_SHORT).show();
-
+                //TODO: push to a 3rd table order_status for web
 
             }
         });

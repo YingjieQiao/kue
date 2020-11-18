@@ -31,6 +31,8 @@ public class OrderHolder extends RecyclerView.ViewHolder {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference orders =  database.getReference("accounts")
             .child(db_key_username).child("orders");
+    DatabaseReference order_stats =  database.getReference("accounts")
+            .child(db_key_username).child("order_stats");
 
     View mView;
     TextView textViewOrder;
@@ -55,11 +57,15 @@ public class OrderHolder extends RecyclerView.ViewHolder {
                             for (DataSnapshot order : snapshot.getChildren()) {
                                 System.out.println(order.child("orderID").getValue());
                                 if (orderId.equals(order.child("orderID").getValue())) {
-                                    String postKey = order.getRef().getKey();
+                                    /*String postKey = order.getRef().getKey();
                                     //Long value = (Long) order.child("finishTime").getValue();
                                     assert postKey != null;
                                     orders.child(postKey).child("finishTime").setValue(System.currentTimeMillis());
-                                    //System.out.println("done");
+                                    //System.out.println("done");*/
+                                    order.getRef().removeValue();
+                                    Order orderFinished = order.getValue(Order.class);
+                                    order_stats.push().setValue(orderFinished);
+                                    //TODO: update order_status for web
                                 }
 
                             }
@@ -75,13 +81,6 @@ public class OrderHolder extends RecyclerView.ViewHolder {
                 }
             }
         });
-    }
-
-
-    void setOrder_(Order order) {
-        Long finishTime_content = order.getFinishTime();
-
-        if (finishTime_content == -1) setOrder(order);
     }
 
 
