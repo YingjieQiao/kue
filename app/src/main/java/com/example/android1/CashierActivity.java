@@ -52,7 +52,8 @@ public class CashierActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.i(TAG,"Order submitted");
-                String db_key_username = mPreferences.getString(DB_KEY_USERNAME, "ERROR");
+                // String db_key_username = mPreferences.getString(DB_KEY_USERNAME, "ERROR");
+                String db_key_username = MyProperties.getInstance().username;
                 DatabaseReference restaurant_db = db.getReference("accounts").child(db_key_username);//getting the path towards where to place the data
                 HashMap<String, String> foodorder = new HashMap<String,String>();
                 String receiptid = UUID.randomUUID().toString();//this will generate a random uuid for the receipt order
@@ -66,11 +67,10 @@ public class CashierActivity extends AppCompatActivity {
                 Date dateobj = new Date();
 
                 Order order = new Order(foodorder, System.currentTimeMillis(), (long) -1,
-                        df.format(dateobj), false, receiptid);
+                        df.format(dateobj), receiptid);
                 restaurant_db.child("orders").push().setValue(order);
+                restaurant_db.child("order_web").push().setValue(order);
                 Toast.makeText(CashierActivity.this,"Order " + receiptid + " has been submitted", Toast.LENGTH_SHORT).show();
-
-
             }
         });
     }

@@ -8,7 +8,6 @@ public class Order {
     Long OrderTime;
     Long FinishTime;
     String OrderDate;
-    boolean Displayed;
     String OrderID;
 
     public String getOrderID() {
@@ -17,14 +16,6 @@ public class Order {
 
     public void setOrderID(String orderID) {
         OrderID = orderID;
-    }
-
-    public boolean isDisplayed() {
-        return Displayed;
-    }
-
-    public void setDisplayed(boolean displayed) {
-        Displayed = displayed;
     }
 
     public Order() {}  // Needed for Firebase
@@ -66,13 +57,12 @@ public class Order {
 
     public Order(HashMap<String,String> food, Long orderTime, Long finishTime,
 
-                 String orderDate, boolean displayed, String id) {
+                 String orderDate, String id) {
 
         Food = food;
         OrderTime = orderTime;
         FinishTime = finishTime;
         OrderDate = orderDate;
-        Displayed = displayed;
         OrderID = id;
     }
 }

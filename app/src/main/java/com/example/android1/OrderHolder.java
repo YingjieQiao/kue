@@ -27,10 +27,15 @@ public class OrderHolder extends RecyclerView.ViewHolder {
     SharedPreferences mPreferences = CookActivity.getContextOfApplication().
             getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
     public static String DB_KEY_USERNAME; // the child in firebase to query from
-    String db_key_username = mPreferences.getString(DB_KEY_USERNAME, "ERROR");
+    //String db_key_username = mPreferences.getString(DB_KEY_USERNAME, "ERROR");
+    String db_key_username = MyProperties.getInstance().username;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference orders =  database.getReference("accounts")
             .child(db_key_username).child("orders");
+    DatabaseReference order_stats =  database.getReference("accounts")
+            .child(db_key_username).child("order_stats");
+    DatabaseReference order_web =  database.getReference("accounts")
+            .child(db_key_username).child("order_web");
 
     View mView;
     TextView textViewOrder;
@@ -48,22 +53,41 @@ public class OrderHolder extends RecyclerView.ViewHolder {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
+
+
+                    order_web.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot order : snapshot.getChildren()) {
+                                //System.out.println(order.child("orderID").getValue());
+                                if (orderId.equals(order.child("orderID").getValue())) {
+                                    String postKey = order.getRef().getKey();
+                                    //Long value = (Long) order.child("finishTime").getValue();
+                                    assert postKey != null;
+                                    order_web.child(postKey).child("finishTime").setValue(System.currentTimeMillis());
+
+                                    Order orderFinished = order.getValue(Order.class);
+                                    order_stats.push().setValue(orderFinished);
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+
                     orders.addListenerForSingleValueEvent(new ValueEventListener() {
 
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             for (DataSnapshot order : snapshot.getChildren()) {
-                                System.out.println(order.child("orderID").getValue());
                                 if (orderId.equals(order.child("orderID").getValue())) {
-                                    String postKey = order.getRef().getKey();
-                                    //Long value = (Long) order.child("finishTime").getValue();
-                                    assert postKey != null;
-                                    orders.child(postKey).child("finishTime").setValue(System.currentTimeMillis());
-                                    //System.out.println("done");
+                                    order.getRef().removeValue();
                                 }
-
                             }
-
                         }
 
                         @Override
@@ -75,13 +99,6 @@ public class OrderHolder extends RecyclerView.ViewHolder {
                 }
             }
         });
-    }
-
-
-    void setOrder_(Order order) {
-        Long finishTime_content = order.getFinishTime();
-
-        if (finishTime_content == -1) setOrder(order);
     }
 
 
