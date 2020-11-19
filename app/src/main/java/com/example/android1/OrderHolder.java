@@ -27,7 +27,8 @@ public class OrderHolder extends RecyclerView.ViewHolder {
     SharedPreferences mPreferences = CookActivity.getContextOfApplication().
             getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
     public static String DB_KEY_USERNAME; // the child in firebase to query from
-    String db_key_username = mPreferences.getString(DB_KEY_USERNAME, "ERROR");
+    //String db_key_username = mPreferences.getString(DB_KEY_USERNAME, "ERROR");
+    String db_key_username = MyProperties.getInstance().username;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference orders =  database.getReference("accounts")
             .child(db_key_username).child("orders");

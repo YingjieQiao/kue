@@ -53,7 +53,8 @@ public class CookActivity extends AppCompatActivity {
         contextOfApplication = getApplicationContext();
 
         mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
-        String db_key_username = mPreferences.getString(DB_KEY_USERNAME, "ERROR");
+        //String db_key_username = mPreferences.getString(DB_KEY_USERNAME, "ERROR");
+        String db_key_username = MyProperties.getInstance().username;
         Query orders = database.getReference().child("/accounts/"+db_key_username+"/orders");
         System.out.println(orders);
         RecyclerView recyclerView = findViewById(R.id.cook_recycler_view);

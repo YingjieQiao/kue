@@ -52,7 +52,8 @@ public class CashierActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.i(TAG,"Order submitted");
-                String db_key_username = mPreferences.getString(DB_KEY_USERNAME, "ERROR");
+                // String db_key_username = mPreferences.getString(DB_KEY_USERNAME, "ERROR");
+                String db_key_username = MyProperties.getInstance().username;
                 DatabaseReference restaurant_db = db.getReference("accounts").child(db_key_username);//getting the path towards where to place the data
                 HashMap<String, String> foodorder = new HashMap<String,String>();
                 String receiptid = UUID.randomUUID().toString();//this will generate a random uuid for the receipt order
