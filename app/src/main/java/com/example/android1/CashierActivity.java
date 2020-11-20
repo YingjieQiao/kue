@@ -24,7 +24,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.UUID;
 
-public class CashierActivity extends AppCompatActivity {
+public class CashierActivity extends AppCompatActivity implements View.OnClickListener {
     int count=0;
     int count_2=0;
     int count_3=0;
@@ -45,6 +45,7 @@ public class CashierActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cashier);
+
 
         DatabaseReference db_menu =  db.getReference("accounts")
                 .child(db_key_username).child("menu");
@@ -68,28 +69,45 @@ public class CashierActivity extends AppCompatActivity {
             }
         });
 
-        for (String dishname: menu.keySet()) {
-            HashMap<String, Double> food_item = menu.get(dishname);
-            double price = food_item.get("price");
-            double ETA = food_item.get("ETA");
+        for (String dishname: menu.keySet()) { // getting the keys of the hashmap which are the dishes
+            HashMap<String, Double> food_item = menu.get(dishname);//this will get the food name
+            double price = food_item.get("price");//price of food
+            double ETA = food_item.get("ETA");//get the eta timing based on the dishname
 
             // programatically create buttons
+
+
             // bind the 1 same onclick to all b
 
             minus_button.getID("minus")
         }
+        @Override
+        public void onClick(View v) {
 
-        private OnClickListener onClickListener = new OnClickListener() {
+        }
+
+        private View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 switch(v.getId()){
-                    case R.id.button1:
-                        //DO something
+                    case R.id.increase:
+                        count = count + 1;
+                        //total_cost=total_cost+pricing_chicken_rice;//writing the price of the food
+                        display(count);
+                        display_4(total_cost);
                         break;
-                    case R.id.button2:
-                        //DO something
-                        break;
+                    case R.id.decrease:
+                        TextView chickenrice =findViewById(R.id.integer_number);
+                        if(Integer.parseInt(chickenrice.getText().toString())>0){//checks whether the counter value is >=0 so that normal additionals can be done
+                            count = count - 1;
+                            total_cost=total_cost-pricing_chicken_rice;//writing the price of the food
+                            display_4(total_cost);
+                            display(count);}
+                        else{//this checks whether is it = 0 anot
+                            display_4(0);//this is to prevent the value of the counter to go below 0 when pressed
 
+                        }
+                        break;
                 }
 
             }
@@ -97,13 +115,13 @@ public class CashierActivity extends AppCompatActivity {
 
         // the following are hardcoded textvies and buttons
         TextView chickenricenumber = findViewById(R.id.integer_number);
-        TextView duckricenumber = findViewById(R.id.integer_number_2);
+        /*TextView duckricenumber = findViewById(R.id.integer_number_2);
         TextView sataynumber = findViewById(R.id.integer_number_3);
         TextView totalcost = findViewById(R.id.totalcostvalue);
-        Button submitbutton = findViewById(R.id.submitbutton);
+        Button submitbutton = findViewById(R.id.submitbutton);*/
         mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
 
-        submitbutton.setOnClickListener(new View.OnClickListener() {
+/*        submitbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.i(TAG,"Order submitted");
@@ -128,7 +146,7 @@ public class CashierActivity extends AppCompatActivity {
                 Toast.makeText(CashierActivity.this,"Order " + receiptid + " has been submitted", Toast.LENGTH_SHORT).show();
             }
         });
-    }
+    }*/
 
 
         public void increaseInteger(View v) {//increase the number of counter of counter of chicken rice

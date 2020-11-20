@@ -5,41 +5,44 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CashierActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rootlayout"
+        android:orientation="horizontal"
+        >
+        <Button
+            android:id="@+id/decrease"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/minussign"
+            />
 
-    <Button
-        android:id="@+id/decrease"
+        <TextView
+            android:id="@+id/integer_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/display_number"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:onClick="decreaseInteger"
-        android:text="@string/minussign"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/increase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/plussign" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="foodname" />
 
-    <TextView
-        android:id="@+id/integer_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="@string/display_number"
-        android:textSize="70sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/decrease"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/increase"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="52dp"
-        android:onClick="increaseInteger"
-        android:text="@string/plussign"
-        app:layout_constraintStart_toEndOf="@+id/integer_number"
-        app:layout_constraintTop_toTopOf="parent" />
-    <!--second button onwards-->
+
+    </LinearLayout>
+
+
+
+<!--    &lt;!&ndash;second button onwards&ndash;&gt;
 
     <TextView
         android:layout_width="80dp"
@@ -86,7 +89,7 @@
         app:layout_constraintStart_toEndOf="@+id/integer_number_2"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!--    third button onwards-->
+    &lt;!&ndash;    third button onwards&ndash;&gt;
 
     <TextView
         android:layout_width="80dp"
@@ -174,7 +177,7 @@
         android:layout_marginBottom="144dp"
         android:text="Submit"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/total_cost" />
+        app:layout_constraintStart_toEndOf="@+id/total_cost" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
