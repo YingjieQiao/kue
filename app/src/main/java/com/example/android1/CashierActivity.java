@@ -9,10 +9,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -34,13 +38,64 @@ public class CashierActivity extends AppCompatActivity {
     private String sharedPrefFile = "com.example.android1.mainsharedprefs";
     SharedPreferences mPreferences;
     public static String USER; // the current user logged in the app
-    public static String DB_KEY_USERNAME; // the child in firebase to query from
+    String db_key_username = MyProperties.getInstance().username;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cashier);
+
+        DatabaseReference db_menu =  db.getReference("accounts")
+                .child(db_key_username).child("menu");
+        HashMap<String, HashMap<String, Double>> menu = new HashMap<>();
+        db_menu.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dish : snapshot.getChildren()) {
+                    double price = (double) dish.child("price").getValue();
+                    double ETA = (double) dish.child("ETA").getValue();
+                    HashMap<String, Double> food_item = new HashMap<>();
+                    food_item.put("price", price);
+                    food_item.put("ETA", ETA);
+                    menu.put(dish.getKey(), food_item);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        for (String dishname: menu.keySet()) {
+            HashMap<String, Double> food_item = menu.get(dishname);
+            double price = food_item.get("price");
+            double ETA = food_item.get("ETA");
+
+            // programatically create buttons
+            // bind the 1 same onclick to all b
+
+            minus_button.getID("minus")
+        }
+
+        private OnClickListener onClickListener = new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch(v.getId()){
+                    case R.id.button1:
+                        //DO something
+                        break;
+                    case R.id.button2:
+                        //DO something
+                        break;
+
+                }
+
+            }
+        };
+
+        // the following are hardcoded textvies and buttons
         TextView chickenricenumber = findViewById(R.id.integer_number);
         TextView duckricenumber = findViewById(R.id.integer_number_2);
         TextView sataynumber = findViewById(R.id.integer_number_3);
