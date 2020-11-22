@@ -20,10 +20,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Map;
 
-
-
-
-
 public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();

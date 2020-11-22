@@ -13,7 +13,6 @@
     <string name="password">Password</string>
     <string name="Login">login</string>
     <string name="cancel">Cancel</string>
-<<<<<<< HEAD
     <string name="bar_chart">Bar Chart</string>
     <string name="pie_chart">Pie Chart</string>
     <string name="food_sales">Food Sales</string>
@@ -27,7 +26,6 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-=======
     <string name="plussign">+</string>
     <string name="minussign">-</string>
     <string name="chicken_rice">ChickenRice</string>
@@ -38,7 +36,7 @@
     <string name="Totalcost">Total Cost</string>
     <string name="submit">Submit</string>
     <string name="cook_great_food" />
+    <string name="hello_there">Hello There!</string>
 
 
->>>>>>> origin/master
 </resources>
