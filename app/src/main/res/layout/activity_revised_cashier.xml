@@ -30,11 +30,13 @@
             android:id="@+id/increase"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/plussign" />
+            android:text="@string/plussign"
+            android:layout_marginRight="20dp"/> //add space between two views
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="foodname" />
+            android:text="foodname"
+            android:layout_marginRight="40dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

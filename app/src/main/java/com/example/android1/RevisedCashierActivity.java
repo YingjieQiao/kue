@@ -62,6 +62,8 @@ public class RevisedCashierActivity extends AppCompatActivity implements View.On
             }
         })
         ;
+        mPreferences=getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
+        SharedPreferences.Editor preferenceseditor =mPreferences.edit();//data persistance in the case when the user rotates the screen , the whole data will be gone
         int count = menu.size();//number of food in the menu
         Button[] Increasebuttonarray = new Button[count];// creating an array for the number of increase buttons depending on the number of food in the menu
         Button[] Decreasebuttonarray = new Button[count];//creating an array for the number of decrease buttons depending on the number of food in menu
@@ -76,38 +78,50 @@ public class RevisedCashierActivity extends AppCompatActivity implements View.On
             double ETA = food_item.get("ETA");//get the eta timing based on the dishname
 
             // programatically create buttons
+            LinearLayout l = findViewById(R.id.mainlayout);//reference to the linear layout in the Activity_revised cashier xml that is nest in the first linear layout
+            LinearLayout.LayoutParams minustextparameters = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);//Creating the parameters for the the minus plus and text view layout width and height
 
-
-
-            textViewarray[count_2] =new TextView(this);//creating a new object in the array that is textview
-            textViewarray[count_2].setTextSize(10);//setting the textview display number text size 10 display the counter
-
-            Increasebuttonarray[count_2] = new Button(this);//creating a new object in the array that is the decrease button
-            Increasebuttonarray[count_2].setText("+");
 
             Decreasebuttonarray[count-2]= new Button(this);//creating a new object in the array that is the increase button
             Decreasebuttonarray[count_2].setText("-");
 
+            textViewarray[count_2] =new TextView(this);//creating a new object in the array that is textview
+            textViewarray[count_2].setTextSize(10);//setting the textview display number text size 10 display the counter
+
+
+            l.addView(Decreasebuttonarray[count_2],minustextparameters);// adding the view to layout l which was specified
+            l.addView(textViewarray[count_2],minustextparameters);//adding these views to the layout l which was specified
+
+
+
+            Increasebuttonarray[count_2] = new Button(this);//creating a new object in the array that is the decrease button
+            Increasebuttonarray[count_2].setText("+");
+            minustextparameters.setMargins(0,0,20,0); // setting the margins left , top right bottom respectively the space between the different views
+            l.addView(Increasebuttonarray[count_2],minustextparameters);// adding these views to the layout
+
             foodarrayname[count_2] = new TextView(this);
             foodarrayname[count_2].setText(dishname);//name of dish
             foodarrayname[count_2].setTextSize(10);//test the size of the wording
+            minustextparameters.setMargins(0,0,40,0);
+            l.addView(foodarrayname[count_2],minustextparameters);
+
 
             pricearray[count_2] =new TextView(this);
             pricearray[count_2].setText(String.valueOf(price));
+            minustextparameters.setMargins(0,0,0,0);
+            l.addView(pricearray[count_2],minustextparameters);
 
 
-            LinearLayout l = findViewById(R.id.mainlayout);//reference to the linear layout in the Activity_revised cashier xml that is nest in the first linear layout
+
+
+
+
+
             //l.setOrientation(LinearLayout.HORIZONTAL);//horizontal orientation
 
             //LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT);//setting out the width and height for the new layout
             //l.setLayoutParams(lp);
-            LinearLayout.LayoutParams minusplustextparameters = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);//Creating the parameters for the the minus plus and text view layout width and height
-
-            l.addView(Decreasebuttonarray[count_2],minusplustextparameters);// adding the view to layout l which was specified
-            l.addView(textViewarray[count_2],minusplustextparameters);//adding these views to the layout l which was specified
-            l.addView(Increasebuttonarray[count_2],minusplustextparameters);// adding these views to the layout
-            l.addView(foodarrayname[count_2],minusplustextparameters);
-            l.addView(pricearray[count_2],minusplustextparameters);
+            
 
             count_2+=1;
 
@@ -119,11 +133,11 @@ public class RevisedCashierActivity extends AppCompatActivity implements View.On
             // bind the 1 same onclick to all b
 
         }
-        //mPreferences=getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
-        //SharedPreferences.Editor preferenceseditor =mPreferences.edit();
+
+
 
         //to edit the file name com.example.android1.mainsharedprefs
-    
+
     //stuck
     @Override
     public void onClick(View v) {//multiple switch buttons
