@@ -15,6 +15,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class RatingsStatsActivity extends AppCompatActivity {
 
+    // declare objects
     TextView ratings;
     RatingBar ratingBar;
     DatabaseReference database;
@@ -26,15 +27,16 @@ public class RatingsStatsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ratings_stats);
 
-        ratings = findViewById(R.id.ratings);
-        ratingBar = findViewById(R.id.ratingBar);
+        ratings = findViewById(R.id.ratings); // text view
+        ratingBar = findViewById(R.id.ratingBar); // ratings bar
 
+        // firebase references
         database = FirebaseDatabase.getInstance().getReference().child("accounts").child("username1").child("stats");
         ratersStats = database.child("totalRatings");
         ratingsStats = database.child("averageRating");
 
-        totalRaters();
-        setRatings();
+        totalRaters(); // display total no. of raters
+        setRatings(); // display ratings
     }
 
     // query the total no. of customers who rated

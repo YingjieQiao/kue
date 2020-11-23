@@ -24,6 +24,7 @@ import java.util.ArrayList;
 
 public class FoodStatActivity extends AppCompatActivity {
 
+    // declare objects
     TextView dailyRevenue;
     BarChart foodsChart;
     DatabaseReference database;
@@ -35,19 +36,17 @@ public class FoodStatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_stat);
 
+        // text view & bar chart
         dailyRevenue = findViewById(R.id.totalRevenue);
         foodsChart = findViewById(R.id.foodStats);
 
+        // firebase references
         database = FirebaseDatabase.getInstance().getReference().child("accounts").child("username1").child("stats");
         revenueStats = database.child("dailyRevenue");
         foodStats = database.child("food");
 
-        //query the daily revenue and display in text view
-        retrieveRevenueData();
-
-        // query the food statistics from firebase
-        // and plot bar chart
-        retrieveFoodData();
+        retrieveRevenueData();  //query the daily revenue and display in text view
+        retrieveFoodData(); // query the food statistics from firebase and plot bar chart
     }
 
     // query the total daily revenue
@@ -55,7 +54,7 @@ public class FoodStatActivity extends AppCompatActivity {
         revenueStats.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                dailyRevenue.setText("Today's Revenue: " + snapshot.getValue().toString());
+                dailyRevenue.setText("Today's Revenue: $" + snapshot.getValue().toString());
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {}
@@ -69,7 +68,6 @@ public class FoodStatActivity extends AppCompatActivity {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
                 ArrayList<String> foodNames = new ArrayList<>(); //ArrayList of all the food
                 ArrayList<BarEntry> foodArr = new ArrayList<>(); //ArrayList of all the number of purchases for each food to plot bar chart
 

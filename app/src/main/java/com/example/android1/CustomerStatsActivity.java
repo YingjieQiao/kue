@@ -22,6 +22,7 @@ import java.util.ArrayList;
 
 public class CustomerStatsActivity extends AppCompatActivity {
 
+    // declare objects
     TextView dailyCustomers;
     PieChart customerTrafficChart;
     DatabaseReference database;
@@ -33,32 +34,26 @@ public class CustomerStatsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_stats);
 
+        // text view & pie chart
         dailyCustomers = findViewById(R.id.totalCustomers);
         customerTrafficChart = findViewById(R.id.customerTraffic);
+
+        // database references
         database = FirebaseDatabase.getInstance().getReference().child("accounts").child("username1").child("stats");
         customersStats = database.child("totalCustomers");
         trafficStats = database.child("customerTraffic");
 
-        // query the daily total no. of customers
-        retrieveCustomerData();
-
-        // query customer traffic data from firebase
-        // and plot pie chart
-        retrieveTrafficData();
-
+        retrieveCustomerData(); // query the total no. of customers daily
+        retrieveTrafficData(); // query customer traffic data and plot pie chart
     }
 
     // query total no.of customers
     private void retrieveCustomerData() {
         customersStats.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                dailyCustomers.setText("Today's Customers: " + snapshot.getValue().toString());
-            }
+            public void onDataChange(@NonNull DataSnapshot snapshot) { dailyCustomers.setText("Today's Customers: " + snapshot.getValue().toString()); }
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError error) {}
         });
 
     }
