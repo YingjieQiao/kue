@@ -63,11 +63,11 @@ public class CashierActivity extends AppCompatActivity {
                 foodorder.put("Satay",sataynumber.getText().toString());
                 foodorder.put("TotalCost",totalcost.getText().toString());
                 //foodorder.put("receiptorder", String.valueOf(receiptid));
-                DateFormat df = new SimpleDateFormat("dd/MM/yy");
+                DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Date dateobj = new Date();
 
                 Order order = new Order(foodorder, System.currentTimeMillis(), (long) -1,
-                        df.format(dateobj), receiptid);
+                        df.format(dateobj), receiptid, (double) 0);
                 restaurant_db.child("orders").push().setValue(order);
                 restaurant_db.child("order_web").push().setValue(order);
                 Toast.makeText(CashierActivity.this,"Order " + receiptid + " has been submitted", Toast.LENGTH_SHORT).show();

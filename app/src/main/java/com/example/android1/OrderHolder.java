@@ -67,7 +67,7 @@ public class OrderHolder extends RecyclerView.ViewHolder {
                                     order_web.child(postKey).child("finishTime").setValue(System.currentTimeMillis());
 
                                     Order orderFinished = order.getValue(Order.class);
-                                    order_stats.push().setValue(orderFinished);
+                                    // order_stats.push().setValue(orderFinished);
                                 }
                             }
                         }
