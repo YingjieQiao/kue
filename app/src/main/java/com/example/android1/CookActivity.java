@@ -36,12 +36,7 @@ public class CookActivity extends AppCompatActivity {
     }
 
     public static Context contextOfApplication;
-
-    private String sharedPrefFile = "com.example.android1.mainsharedprefs";
-    SharedPreferences mPreferences;
-    public static String DB_KEY_USERNAME; // the child in firebase to query from
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-
     FirebaseRecyclerAdapter adapter;
 
 
@@ -52,8 +47,7 @@ public class CookActivity extends AppCompatActivity {
         LinearLayout cookLayout = findViewById(R.id.cookLayout);
         contextOfApplication = getApplicationContext();
 
-        mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
-        //String db_key_username = mPreferences.getString(DB_KEY_USERNAME, "ERROR");
+
         String db_key_username = MyProperties.getInstance().username;
         Query orders = database.getReference().child("/accounts/"+db_key_username+"/orders");
         System.out.println(orders);
