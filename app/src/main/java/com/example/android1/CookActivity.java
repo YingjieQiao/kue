@@ -1,34 +1,22 @@
 package com.example.android1;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-
-import java.util.HashMap;
 
 public class CookActivity extends AppCompatActivity {
     public static Context getContextOfApplication() {
@@ -48,7 +36,7 @@ public class CookActivity extends AppCompatActivity {
         contextOfApplication = getApplicationContext();
 
 
-        String db_key_username = MyProperties.getInstance().username;
+        String db_key_username = AppProperties.getInstance().username;
         Query orders = database.getReference().child("/accounts/"+db_key_username+"/orders");
         System.out.println(orders);
         RecyclerView recyclerView = findViewById(R.id.cook_recycler_view);
