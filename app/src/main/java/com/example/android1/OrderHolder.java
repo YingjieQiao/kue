@@ -14,7 +14,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
@@ -28,7 +27,7 @@ public class OrderHolder extends RecyclerView.ViewHolder {
             getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
     public static String DB_KEY_USERNAME; // the child in firebase to query from
     //String db_key_username = mPreferences.getString(DB_KEY_USERNAME, "ERROR");
-    String db_key_username = MyProperties.getInstance().username;
+    String db_key_username = AppProperties.getInstance().username;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference orders =  database.getReference("accounts")
             .child(db_key_username).child("orders");
@@ -54,20 +53,19 @@ public class OrderHolder extends RecyclerView.ViewHolder {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
 
-
+                    // update finish time
                     order_web.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             for (DataSnapshot order : snapshot.getChildren()) {
-                                //System.out.println(order.child("orderID").getValue());
                                 if (orderId.equals(order.child("orderID").getValue())) {
                                     String postKey = order.getRef().getKey();
                                     //Long value = (Long) order.child("finishTime").getValue();
                                     assert postKey != null;
                                     order_web.child(postKey).child("finishTime").setValue(System.currentTimeMillis());
 
-                                    Order orderFinished = order.getValue(Order.class);
-                                    order_stats.push().setValue(orderFinished);
+                                    //Order orderFinished = order.getValue(Order.class);
+                                    //order_stats.push().setValue(orderFinished);
                                 }
                             }
                         }
@@ -78,7 +76,7 @@ public class OrderHolder extends RecyclerView.ViewHolder {
                         }
                     });
 
-
+                    // remove from `orders` table and from cook activity
                     orders.addListenerForSingleValueEvent(new ValueEventListener() {
 
                         @Override
