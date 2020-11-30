@@ -18,25 +18,27 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Totalcost" />
 
-        <TextView
-            android:id="@+id/totalCost"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="30sp"
-            android:paddingRight="30sp"
-            android:text="@string/display_number" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Totalcost" />
 
-        <Button
-            android:id="@+id/submitbutton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Submit" />
+            <TextView
+                android:id="@+id/totalCost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="30sp"
+                android:paddingRight="30sp"
+                android:text="@string/display_number" />
+
+            <Button
+                android:id="@+id/submitbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Submit" />
         </LinearLayout>
 
         <TextView

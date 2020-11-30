@@ -15,6 +15,10 @@
         <activity android:name=".FoodStatActivity" />
         <activity android:name=".HomePageActivity" />
         <activity
+            android:name=".QRCodeActivity"
+            android:parentActivityName=".CashierActivity"
+            />
+        <activity
             android:name=".StatsActivity"
             android:label="StatsActivity"
             android:parentActivityName=".HomePageActivity"
@@ -57,6 +61,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

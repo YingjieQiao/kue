@@ -1,4 +1,5 @@
 package com.example.android1;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
@@ -41,10 +42,10 @@ public class CashierActivity extends AppCompatActivity {
         cost = findViewById(R.id.totalCost);
         orderList = findViewById(R.id.orderList);
         submitBtn = findViewById(R.id.submitbutton);
-
-        order = FirebaseDatabase.getInstance().getReference().child("accounts").child("username1").child("orders");
-        webOrder = FirebaseDatabase.getInstance().getReference().child("accounts").child("username1").child("order_web");
-        foodMenu = FirebaseDatabase.getInstance().getReference().child("accounts").child("username1").child("foods");
+        String username = AppProperties.getInstance().username;
+        order = FirebaseDatabase.getInstance().getReference().child("accounts").child(username).child("orders");
+        webOrder = FirebaseDatabase.getInstance().getReference().child("accounts").child(username).child("order_web");
+        foodMenu = FirebaseDatabase.getInstance().getReference().child("accounts").child(username).child("foods");
 
         retrieveFoodMenu();
 
@@ -67,6 +68,10 @@ public class CashierActivity extends AppCompatActivity {
             cost.setText("0");
             orderList.setText("No Order");
 
+            String url = Utils.generateURL(username, receiptId);
+            Intent qrPageIntent = new Intent(this, QRCodeActivity.class);
+            qrPageIntent.putExtra(QRCodeActivity.key, url);
+            startActivity(qrPageIntent);
         });
 
     }
