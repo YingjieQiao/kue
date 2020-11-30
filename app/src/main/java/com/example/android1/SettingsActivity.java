@@ -24,9 +24,19 @@ public class SettingsActivity extends AppCompatActivity {
     EditText nameinput;
     EditText priceinput;
     EditText etainput;
-    EditText nameinput_delete;
     Button submitbutton;
+
+    EditText nameinput_delete;
     Button removebutton;
+
+    EditText priceinput_update;
+    EditText nameinput_update_price;
+    Button updatebutton_price;
+
+    EditText etainput_update;
+    EditText nameinput_update_eta;
+    Button updatebutton_eta;
+
     Dish dish;
 
     @Override
@@ -38,8 +48,18 @@ public class SettingsActivity extends AppCompatActivity {
         priceinput = (EditText) findViewById(R.id.priceinput);
         etainput = (EditText) findViewById(R.id.etainput);
         submitbutton = (Button) findViewById(R.id.submitbutton);
+
         nameinput_delete = findViewById(R.id.nameinput_delete);
         removebutton = findViewById(R.id.deletebutton);
+
+        nameinput_update_price = findViewById(R.id.nameinput_update_price);
+        priceinput_update = findViewById(R.id.priceinput_update);
+        updatebutton_price = findViewById(R.id.updatebutton_price);
+
+        nameinput_update_eta = findViewById(R.id.nameinput_update_eta);
+        etainput_update = findViewById(R.id.etainput_update);
+        updatebutton_eta = findViewById(R.id.updatebutton_eta);
+
         dish = new Dish();
 
         String db_key_username = AppProperties.getInstance().username;
@@ -84,6 +104,62 @@ public class SettingsActivity extends AppCompatActivity {
                 });
                 Toast.makeText(SettingsActivity.this,
                         "dish removed succesfully", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        updatebutton_price.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = nameinput_update_price.getText().toString().trim();
+                String new_price = priceinput_update.getText().toString().trim();
+                menu.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot dish : snapshot.getChildren()) {
+                            if (name.equals(dish.child("name").getValue())) {
+                                String postKey = dish.getRef().getKey();
+                                assert postKey != null;
+                                menu.child(postKey).child("price").setValue(new_price);
+
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+                Toast.makeText(SettingsActivity.this,
+                        "price updated succesfully", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        updatebutton_eta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = nameinput_update_eta.getText().toString().trim();
+                String new_eta = etainput_update.getText().toString().trim();
+                menu.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot dish : snapshot.getChildren()) {
+                            if (name.equals(dish.child("name").getValue())) {
+                                String postKey = dish.getRef().getKey();
+                                assert postKey != null;
+                                menu.child(postKey).child("eta").setValue(new_eta);
+
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+                Toast.makeText(SettingsActivity.this,
+                        "ETA updated succesfully", Toast.LENGTH_LONG).show();
             }
         });
     }
