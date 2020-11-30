@@ -56,7 +56,6 @@ public class Order {
     }
 
     public HashMap<String,String> getFood() {
-
         return Food;
     }
 

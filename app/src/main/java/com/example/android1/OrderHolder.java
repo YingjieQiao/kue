@@ -98,7 +98,7 @@ public class OrderHolder extends RecyclerView.ViewHolder {
 
 
     void setOrder(Order order) {
-        String food_content = order.getFood().toString();
+        String food_content = get_order_item(order.getFood());
         System.out.println(order.getFood());
         Long orderTime_content = order.getOrderTime();
         String orderDate_content = order.getOrderDate();
@@ -116,5 +116,16 @@ public class OrderHolder extends RecyclerView.ViewHolder {
     void setId(String id){
         this.orderId = id;
         Log.i("ORDER_HOLDER", "ORDER ID: " + id);
+    }
+
+    String get_order_item( HashMap<String,String> order) {
+        HashMap<String,String> food_return = new HashMap<>();
+        for (String key : order.keySet()) {
+            if (key.equals("receiptOrder")  || key.equals("totalCost")) {
+                continue;
+            }
+            food_return.put(key, order.get(key));
+        }
+        return food_return.toString();
     }
 }
