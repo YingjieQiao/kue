@@ -1,6 +1,5 @@
 package com.example.android1;
 
-import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
@@ -19,14 +18,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import static android.content.Context.MODE_PRIVATE;
 
 public class OrderHolder extends RecyclerView.ViewHolder {
-    private String sharedPrefFile = "com.example.android1.mainsharedprefs";
-    SharedPreferences mPreferences = CookActivity.getContextOfApplication().
-            getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
-    public static String DB_KEY_USERNAME; // the child in firebase to query from
-    //String db_key_username = mPreferences.getString(DB_KEY_USERNAME, "ERROR");
     String db_key_username = AppProperties.getInstance().username;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference orders =  database.getReference("accounts")
