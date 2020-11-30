@@ -33,6 +33,7 @@ public class CashierActivity extends AppCompatActivity {
     DatabaseReference webOrder;
     Double totalCost;
     HashMap<String, String> orderLs = new HashMap<>();
+    Double ETA = 0.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +57,29 @@ public class CashierActivity extends AppCompatActivity {
             orderLs.put("receiptOrder", receiptId);
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date orderDate = new Date();
+
+            /*foodMenu.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot dish : snapshot.getChildren()) {
+                        String dishname = (String) dish.child("name").getValue();
+                        System.out.println(dishname);
+                        Double eta = Double.parseDouble(dish.child("price").getValue().toString());
+                        if (orderLs.containsKey(dishname)) {
+                            int quantity = Integer.parseInt(orderLs.get(dishname));
+                            ETA += quantity * eta;
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });*/
+
             Order newOrder = new Order(orderLs, System.currentTimeMillis(), (long) -1,
-                    dateFormat.format(orderDate), receiptId, (double) 0);
+                    dateFormat.format(orderDate), receiptId, (double) 0, ETA);
             order.push().setValue(newOrder);
             webOrder.push().setValue(newOrder);
 
@@ -89,8 +111,6 @@ public class CashierActivity extends AppCompatActivity {
 
                 if (snapshot.hasChildren()) {
                     for (DataSnapshot dish : snapshot.getChildren()) {
-                        // HashMap<String, Object> foodInfo = (HashMap<String, Object>)dish.getValue();
-
                         Double price = Double.parseDouble(dish.child("price").getValue().toString());
                         Double eta = Double.parseDouble(dish.child("price").getValue().toString());
 
@@ -127,7 +147,11 @@ public class CashierActivity extends AppCompatActivity {
                 if (orderLs.containsKey(food)) {
                     int foodCnt = Integer.parseInt(orderLs.get(food));
                     orderLs.put(food, Integer.toString(foodCnt+1));
-                } else { orderLs.put(food, Integer.toString(1)); }
+                    ETA += Double.parseDouble(foodETA.get(foodList.indexOf(food)));
+                } else {
+                    orderLs.put(food, Integer.toString(1));
+                    ETA += Double.parseDouble(foodETA.get(foodList.indexOf(food)));
+                }
 
                 orderList.setText(orderLs.toString());
                 cost.setText(String.valueOf(totalCost));

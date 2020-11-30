@@ -10,6 +10,15 @@ public class Order {
     String OrderDate;
     String OrderID;
     Double Rating;
+    Double ETA;
+
+    public Double getETA() {
+        return ETA;
+    }
+
+    public void setETA(Double ETA) {
+        this.ETA = ETA;
+    }
 
     public Double getRating() {
         return Rating;
@@ -65,7 +74,7 @@ public class Order {
 
 
     public Order(HashMap<String,String> food, Long orderTime, Long finishTime,
-                 String orderDate, String id, Double rating) {
+                 String orderDate, String id, Double rating, Double eta) {
 
         Food = food;
         OrderTime = orderTime;
@@ -73,6 +82,7 @@ public class Order {
         OrderDate = orderDate;
         OrderID = id;
         Rating = rating;
+        ETA = eta;
     }
 }
 
