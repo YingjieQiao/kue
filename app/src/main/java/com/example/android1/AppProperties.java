@@ -3,7 +3,7 @@ package com.example.android1;
 public class AppProperties {
     private static AppProperties mInstance= null;
 
-    public static String username;
+    public String username;
 
     protected AppProperties(){}
 
@@ -15,6 +15,6 @@ public class AppProperties {
     }
 
     public static void setUsername(String username_string) {
-        username = username_string;
+        getInstance().username = username_string;
     }
 }

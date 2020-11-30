@@ -61,4 +61,5 @@ dependencies {
     // Finding authenticated user (Riley)
     implementation 'com.google.firebase:firebase-auth:20.0.0'
     implementation 'com.google.android.gms:play-services-gcm:17.0.0'
+    implementation 'androidmads.library.qrgenearator:QRGenearator:1.0.3'
 }
