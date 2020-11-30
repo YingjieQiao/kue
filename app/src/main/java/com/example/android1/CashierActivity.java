@@ -58,26 +58,6 @@ public class CashierActivity extends AppCompatActivity {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date orderDate = new Date();
 
-            /*foodMenu.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for (DataSnapshot dish : snapshot.getChildren()) {
-                        String dishname = (String) dish.child("name").getValue();
-                        System.out.println(dishname);
-                        Double eta = Double.parseDouble(dish.child("price").getValue().toString());
-                        if (orderLs.containsKey(dishname)) {
-                            int quantity = Integer.parseInt(orderLs.get(dishname));
-                            ETA += quantity * eta;
-                        }
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });*/
-
             Order newOrder = new Order(orderLs, System.currentTimeMillis(), (long) -1,
                     dateFormat.format(orderDate), receiptId, (double) 0, ETA);
             order.push().setValue(newOrder);

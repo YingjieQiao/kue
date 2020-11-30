@@ -60,12 +60,9 @@ public class OrderHolder extends RecyclerView.ViewHolder {
                             for (DataSnapshot order : snapshot.getChildren()) {
                                 if (orderId.equals(order.child("orderID").getValue())) {
                                     String postKey = order.getRef().getKey();
-                                    //Long value = (Long) order.child("finishTime").getValue();
                                     assert postKey != null;
                                     order_web.child(postKey).child("finishTime").setValue(System.currentTimeMillis());
 
-                                    //Order orderFinished = order.getValue(Order.class);
-                                    //order_stats.push().setValue(orderFinished);
                                 }
                             }
                         }
