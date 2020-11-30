@@ -23,10 +23,6 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
-    private String sharedPrefFile = "com.example.android1.mainsharedprefs";
-    SharedPreferences mPreferences;
-    private static String USER = "default"; // the current user logged in the app
-    private static DataSnapshot DB;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference accounts = database.getReference("accounts");
@@ -36,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
 
         Button loginButton = findViewById(R.id.button_cash);
         EditText username = findViewById(R.id.username);
@@ -46,15 +41,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d(LOG_TAG, "Login Button clicked!");
-                SharedPreferences.Editor preferencesEditor = mPreferences.edit();
-                preferencesEditor.putString(USER, username.getText().toString());
-                preferencesEditor.apply();
+                String[] parts = username.getText().toString().split("@");
+                AppProperties.setUsername(parts[0]);
                 checkPassword(username.getText().toString(), password.getText().toString(),
                             new CompareValueCallback<Boolean>() {
                         @Override
                         public void callback(Boolean data) {
                             if (data) {
-                                Utils.generate_db_key(mPreferences);
                                 Intent intent = new Intent(MainActivity.this,
                                         HomePageActivity.class);
                                 startActivity(intent);

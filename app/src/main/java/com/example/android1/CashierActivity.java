@@ -53,9 +53,9 @@ public class CashierActivity extends AppCompatActivity {
             String receiptId = UUID.randomUUID().toString();//this will generate a random uuid for the receipt order
             orderLs.put("totalCost", Double.toString(totalCost));
             orderLs.put("receiptOrder", receiptId);
-            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date orderDate = new Date();
-            Order newOrder = new Order(orderLs, System.currentTimeMillis(), (long) -1, dateFormat.format(orderDate), receiptId);
+            Order newOrder = new Order(orderLs, System.currentTimeMillis(), (long) -1, dateFormat.format(orderDate), receiptId, (double) 0);
             order.push().setValue(newOrder);
             webOrder.push().setValue(newOrder);
 
@@ -66,6 +66,7 @@ public class CashierActivity extends AppCompatActivity {
             orderLs.clear();
             cost.setText("0");
             orderList.setText("No Order");
+
         });
 
     }
