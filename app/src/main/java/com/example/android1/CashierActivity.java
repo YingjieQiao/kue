@@ -45,7 +45,7 @@ public class CashierActivity extends AppCompatActivity {
         String username = AppProperties.getInstance().username;
         order = FirebaseDatabase.getInstance().getReference().child("accounts").child(username).child("orders");
         webOrder = FirebaseDatabase.getInstance().getReference().child("accounts").child(username).child("order_web");
-        foodMenu = FirebaseDatabase.getInstance().getReference().child("accounts").child(username).child("foods");
+        foodMenu = FirebaseDatabase.getInstance().getReference().child("accounts").child(username).child("menu");
 
         retrieveFoodMenu();
 
@@ -56,11 +56,13 @@ public class CashierActivity extends AppCompatActivity {
             orderLs.put("receiptOrder", receiptId);
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date orderDate = new Date();
-            Order newOrder = new Order(orderLs, System.currentTimeMillis(), (long) -1, dateFormat.format(orderDate), receiptId, (double) 0);
+            Order newOrder = new Order(orderLs, System.currentTimeMillis(), (long) -1,
+                    dateFormat.format(orderDate), receiptId, (double) 0);
             order.push().setValue(newOrder);
             webOrder.push().setValue(newOrder);
 
-            Toast.makeText(CashierActivity.this,"Your order" + " has been submitted", Toast.LENGTH_SHORT).show();
+            Toast.makeText(CashierActivity.this,
+                    "Your order" + " has been submitted", Toast.LENGTH_SHORT).show();
 
             // reset order
             totalCost = 0.;
@@ -86,12 +88,15 @@ public class CashierActivity extends AppCompatActivity {
                 ArrayList<String> foodETA = new ArrayList<>();
 
                 if (snapshot.hasChildren()) {
-                    for (DataSnapshot myDataSnapshot : snapshot.getChildren()) {
-                        HashMap<String, Object> foodInfo = (HashMap<String, Object>) myDataSnapshot.getValue();
+                    for (DataSnapshot dish : snapshot.getChildren()) {
+                        // HashMap<String, Object> foodInfo = (HashMap<String, Object>)dish.getValue();
 
-                        foodList.add(myDataSnapshot.getKey());
-                        foodCost.add((Double) foodInfo.get("price"));
-                        foodETA.add(foodInfo.get("eta").toString());
+                        Double price = Double.parseDouble(dish.child("price").getValue().toString());
+                        Double eta = Double.parseDouble(dish.child("price").getValue().toString());
+
+                        foodList.add((String) dish.child("name").getValue());
+                        foodCost.add(price);
+                        foodETA.add(String.valueOf(eta));
 
                     }
                     createMenuButtons(foodList, foodCost, foodETA);
@@ -104,7 +109,8 @@ public class CashierActivity extends AppCompatActivity {
 
     }
 
-    private void createMenuButtons(ArrayList<String> foodList, ArrayList<Double> foodCost, ArrayList<String> foodETA) {
+    private void createMenuButtons(ArrayList<String> foodList, ArrayList<Double> foodCost,
+                                   ArrayList<String> foodETA) {
 
         LinearLayout layout = findViewById(R.id.CashierActivity);
         totalCost = 0.;
