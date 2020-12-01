@@ -42,6 +42,11 @@
     <string name="don_t_have_an_account">Don\'t have an account?</string>
     <string name="sign_up">sign up</string>
     <string name="verify_your_password">verify your password</string>
+    <string name="ratings">Ratings</string>
+    <string name="restaurant_dashboard">Restaurant Dashboard</string>
+    <string name="food_details">Food Details</string>
+    <string name="date_and_time_of_order">Date and Time of Order</string>
+    <string name="food_s_ready">Food\'s Ready!</string>
 
 
 </resources>
