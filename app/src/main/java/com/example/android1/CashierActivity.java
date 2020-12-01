@@ -163,6 +163,7 @@ public class CashierActivity extends AppCompatActivity {
         Toast.makeText(CashierActivity.this, "Your order" + " has been submitted", Toast.LENGTH_SHORT).show(); // notify cashiers an order has been made
     }
 
+
     // update restaurant statistics
     private void statsUpdate() {
         stats.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -183,6 +184,7 @@ public class CashierActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {}
         });
     }
+
 
     //retrieve all ratings & update stats
     private void updateRatingStats(Stats statistics) {
@@ -209,6 +211,7 @@ public class CashierActivity extends AppCompatActivity {
 
     }
 
+
     //update daily revenue
     private void updateDailyRevenue(Stats statistics) {
         statistics.dailyRevenue = statistics.dailyRevenue + totalCost;
@@ -231,6 +234,7 @@ public class CashierActivity extends AppCompatActivity {
             }
         }
     }
+
 
     // update customer traffic stats
     private void updateCustomerTraffic(Stats statistics) {
