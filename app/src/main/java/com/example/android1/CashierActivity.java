@@ -147,20 +147,25 @@ public class CashierActivity extends AppCompatActivity {
 
     // submit a new order
     private void submitOrder(String receiptId) {
+        if (totalCost!=0){
+            // adding order details
+            orderLs.put("totalCost", Double.toString(totalCost)); //add total cost into order
+            orderLs.put("receiptOrder", receiptId); //add receipt ID into order
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date orderDate = new Date();
+            Order newOrder = new Order(orderLs, System.currentTimeMillis(), (long) -1,
+                    dateFormat.format(orderDate), receiptId, (double) 0, ETA); // create new order
 
-        // adding order details
-        orderLs.put("totalCost", Double.toString(totalCost)); //add total cost into order
-        orderLs.put("receiptOrder", receiptId); //add receipt ID into order
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date orderDate = new Date();
-        Order newOrder = new Order(orderLs, System.currentTimeMillis(), (long) -1,
-                dateFormat.format(orderDate), receiptId, (double) 0, ETA); // create new order
+            //send order to firebase
+            order.push().setValue(newOrder);
+            webOrder.push().setValue(newOrder);
 
-        //send order to firebase
-        order.push().setValue(newOrder);
-        webOrder.push().setValue(newOrder);
+            Toast.makeText(CashierActivity.this, "Your order" + " has been submitted", Toast.LENGTH_SHORT).show(); // notify cashiers an order has been made
+        }else{
 
-        Toast.makeText(CashierActivity.this, "Your order" + " has been submitted", Toast.LENGTH_SHORT).show(); // notify cashiers an order has been made
+            Toast.makeText(CashierActivity.this, "No order is found , please try again later "  , Toast.LENGTH_SHORT).show();
+
+        }
     }
 
     // update restaurant statistics
