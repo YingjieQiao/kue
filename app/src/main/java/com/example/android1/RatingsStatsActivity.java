@@ -17,8 +17,9 @@ public class RatingsStatsActivity extends AppCompatActivity {
 
     // declare objects
     TextView ratings;
+    TextView rating;
     RatingBar ratingBar;
-    DatabaseReference database;
+    DatabaseReference db;
     DatabaseReference ratersStats;
     DatabaseReference ratingsStats;
 
@@ -28,12 +29,13 @@ public class RatingsStatsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ratings_stats);
 
         ratings = findViewById(R.id.ratings); // text view
+        rating = findViewById(R.id.rating);
         ratingBar = findViewById(R.id.ratingBar); // ratings bar
 
         // firebase references
-        database = FirebaseDatabase.getInstance().getReference().child("accounts").child("username1").child("stats");
-        ratersStats = database.child("totalRatings");
-        ratingsStats = database.child("averageRating");
+        db = FirebaseDatabase.getInstance().getReference().child("accounts").child("username1").child("stats");
+        ratersStats = db.child("totalRatings");
+        ratingsStats = db.child("averageRating");
 
         totalRaters(); // display total no. of raters
         setRatings(); // display ratings
@@ -48,12 +50,14 @@ public class RatingsStatsActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {}
         });
     }
-
     // set the number of stars on the RatingsBar
     private void setRatings() {
         ratingsStats.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) { ratingBar.setRating(((Double) snapshot.getValue()).floatValue()); }
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                rating.setText("Restaurant Ratings: " + snapshot.getValue());
+                ratingBar.setRating(((Long) snapshot.getValue()).floatValue());
+            }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {}
         });

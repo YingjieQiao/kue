@@ -15,6 +15,13 @@
         android:textAlignment="center"
         android:gravity="center_horizontal" />
 
+    <TextView
+        android:id="@+id/rating"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textAlignment="center"
+        android:gravity="center_horizontal" />
+
     <RatingBar
         android:id="@+id/ratingBar"
         android:isIndicator="true"

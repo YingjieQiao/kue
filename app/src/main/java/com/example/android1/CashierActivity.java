@@ -249,6 +249,8 @@ public class CashierActivity extends AppCompatActivity {
         if (time.isAfter(_2pm) && time.isBefore(_6pm)) { statistics.customerTraffic.put("2pm-6pm", statistics.customerTraffic.get("2pm-6pm") + 1); }
         if (time.isAfter(_6pm) && time.isBefore(_10pm)) { statistics.customerTraffic.put("6pm-10pm", statistics.customerTraffic.get("6pm-10pm") + 1); }
 
+        statistics.totalCustomers ++;
+
     }
 
     // reset order
