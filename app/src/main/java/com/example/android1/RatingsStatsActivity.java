@@ -19,7 +19,7 @@ public class RatingsStatsActivity extends AppCompatActivity {
     TextView ratings;
     TextView rating;
     RatingBar ratingBar;
-    DatabaseReference db;
+    DatabaseReference database;
     DatabaseReference ratersStats;
     DatabaseReference ratingsStats;
     DatabaseReference order_web;
