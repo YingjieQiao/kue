@@ -15,11 +15,72 @@
       },
       "oauth_client": [
         {
+          "client_id": "12190067463-o4mld6qcg849dak2am9qcu7ac2d5bk6n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.android1",
+            "certificate_hash": "3e36d75ca50a51cd29d9675b26d57547c6d7101b"
+          }
+        },
+        {
+          "client_id": "12190067463-da64uddd83ar4q2bbj2dsbn87cubf919.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.android1",
+            "certificate_hash": "2b676f83e5fddde37fff6295b6e75721f0482aa8"
+          }
+        },
+        {
+          "client_id": "12190067463-ovvj1lb9m86nkf7ea1lk7o51hlel62d2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.android1",
+            "certificate_hash": "b54a27aa446c0c636aeec6161adb5a86047ca493"
+          }
+        },
+        {
           "client_id": "12190067463-ckulhn69c7fkf4r5ooiitc5rk8bjljf9.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.android1",
             "certificate_hash": "08ed7ceb239e6a843fddce1dbbb1ce45a0303920"
+          }
+        },
+        {
+          "client_id": "12190067463-dp6brm4vb041hblo13u3a0c5d1gvotur.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxK0FadCWyNCujvf47hx1JaSpmtgf_Qdc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "12190067463-dp6brm4vb041hblo13u3a0c5d1gvotur.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12190067463:android:c6770cfba81209da01f3a2",
+        "android_client_info": {
+          "package_name": "com.example.settingspage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "12190067463-iq08bmgnv3rqtqjtb82fc06jl40k190s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.settingspage",
+            "certificate_hash": "a6c549dc6bea8c654b62a767693ad3876135d6a1"
           }
         },
         {
