@@ -19,6 +19,10 @@
             android:parentActivityName=".CashierActivity"
             />
         <activity
+            android:name=".SignUpActivity"
+            android:parentActivityName=".MainActivity"
+            />
+        <activity
             android:name=".StatsActivity"
             android:label="StatsActivity"
             android:parentActivityName=".HomePageActivity"

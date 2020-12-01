@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -25,17 +26,29 @@ public class MainActivity extends AppCompatActivity {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference accounts = database.getReference("accounts");
-
+    Button loginButton;
+    EditText username;
+    EditText password;
+    Button signUp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
 
-        Button loginButton = findViewById(R.id.button_cash);
-        EditText username = findViewById(R.id.username);
-        EditText password = findViewById(R.id.password);
+        loginButton = findViewById(R.id.button_cash);
+        username = findViewById(R.id.username);
+        password = findViewById(R.id.password);
+        signUp = findViewById(R.id.button_start_sign_up);
 
+        signUp.setText(Html.fromHtml("<u>sign up here</u>"));
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
+                startActivity(intent);
+            }
+        });
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
