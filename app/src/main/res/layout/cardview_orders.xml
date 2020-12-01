@@ -17,13 +17,13 @@
             android:layout_width="wrap_content"
             android:gravity="center"
             android:layout_height="30dp"
-            android:text="Date and Time of Order" />
+            android:text="@string/date_and_time_of_order" />
         <CheckBox
             android:id="@+id/checkBox_finished"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="false"
-            android:text="Food's Ready!" />
+            android:text="@string/food_s_ready" />
 
         <TextView
             android:id="@+id/cardView_order_item"
