@@ -10,9 +10,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RatingsStatsActivity" />
-        <activity android:name=".CustomerStatsActivity" />
-        <activity android:name=".FoodStatActivity" />
+        <activity android:name=".RatingsStatsActivity"
+            android:parentActivityName=".SettingsActivity"/>
+        <activity android:name=".CustomerStatsActivity"
+            android:parentActivityName=".SettingsActivity"/>
+        <activity android:name=".FoodStatActivity"
+            android:parentActivityName=".SettingsActivity"/>
         <activity android:name=".HomePageActivity" />
         <activity
             android:name=".QRCodeActivity"
