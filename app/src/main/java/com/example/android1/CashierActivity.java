@@ -60,13 +60,13 @@ public class CashierActivity extends AppCompatActivity {
             String receiptId = UUID.randomUUID().toString(); // generate order receipt ID
 
             submitOrder(receiptId); // submit an order
-            generateQRCode(username, receiptId); // generate QR code for customers check orders on website
             statsUpdate(); // update restaurant statistics based on new orders
+            generateQRCode(username, receiptId); // generate QR code for customers check orders on website
         });
 
     }
 
-
+    // get all dishes from firebase
     private void retrieveFoodMenu() {
         foodMenu.addValueEventListener(new ValueEventListener() {
             @Override
@@ -160,9 +160,7 @@ public class CashierActivity extends AppCompatActivity {
         order.push().setValue(newOrder);
         webOrder.push().setValue(newOrder);
 
-        Toast.makeText(CashierActivity.this,
-                "Your order" + " has been submitted", Toast.LENGTH_SHORT).show(); // notify cashiers an order has been made
-
+        Toast.makeText(CashierActivity.this, "Your order" + " has been submitted", Toast.LENGTH_SHORT).show(); // notify cashiers an order has been made
     }
 
     // update restaurant statistics
@@ -172,7 +170,12 @@ public class CashierActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Stats statistics = snapshot.getValue(Stats.class); // retrieve existing statistics
 
-                newStats(statistics); //update statistics
+                updateRatingStats(statistics); //retrieve all ratings & update stats
+                updateDailyRevenue(statistics); // update daily revenue stats
+                updateFoodStats(statistics); // update food stats
+                updateCustomerTraffic(statistics); // update customer traffic stats
+                stats.setValue(statistics); // update firebase
+
                 resetOrder(); //reset order queue
             }
 
@@ -181,11 +184,29 @@ public class CashierActivity extends AppCompatActivity {
         });
     }
 
-    // update existing stats
-    private void newStats(Stats statistics) {
-        updateDailyRevenue(statistics); // update daily revenue stats
-        updateFoodStats(statistics); // update food stats
-        updateCustomerTraffic(statistics); // update customer traffic stats
+    //retrieve all ratings & update stats
+    private void updateRatingStats(Stats statistics) {
+        webOrder.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Long ratings = 0L;
+                Long count = 0L;
+
+                if (snapshot.hasChildren()) {
+                    for (DataSnapshot rating : snapshot.getChildren()) {
+                        ratings += (Long) rating.child("rating").getValue();
+                        count ++;
+                    }
+                }
+                statistics.averageRating = ((Long)(ratings/count)).doubleValue();
+                statistics.totalRatings = count;
+                stats.setValue(statistics);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}
+        });
+
     }
 
     //update daily revenue
