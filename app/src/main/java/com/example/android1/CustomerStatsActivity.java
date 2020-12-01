@@ -53,7 +53,7 @@ public class CustomerStatsActivity extends AppCompatActivity {
     private void retrieveCustomerData() {
         customersStats.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) { dailyCustomers.setText("Today's Customers: " + snapshot.getValue().toString()); }
+            public void onDataChange(@NonNull DataSnapshot snapshot) { dailyCustomers.setText("Today's Customers: " + snapshot.getValue()); }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {}
         });

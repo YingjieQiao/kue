@@ -17,8 +17,9 @@ public class RatingsStatsActivity extends AppCompatActivity {
 
     // declare objects
     TextView ratings;
+    TextView rating;
     RatingBar ratingBar;
-    DatabaseReference database;
+    DatabaseReference db;
     DatabaseReference ratersStats;
     DatabaseReference ratingsStats;
     DatabaseReference order_web;
@@ -32,6 +33,7 @@ public class RatingsStatsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ratings_stats);
 
         ratings = findViewById(R.id.ratings); // text view
+        rating = findViewById(R.id.rating);
         ratingBar = findViewById(R.id.ratingBar); // ratings bar
 
         // firebase references
@@ -41,7 +43,7 @@ public class RatingsStatsActivity extends AppCompatActivity {
         ratersStats = database.child("stats").child("totalRatings");
         ratingsStats = database.child("stats").child("averageRating");
         order_web =  database.child("order_web");
-
+      
         getData();
         showRatings(); // display ratings
     }
@@ -74,6 +76,7 @@ public class RatingsStatsActivity extends AppCompatActivity {
                     }
                 }
             }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
