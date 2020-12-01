@@ -27,8 +27,8 @@
         android:paddingTop="10dp"
         android:text="Food Sales"
         android:textAlignment="center"
-        android:textColor="#F3EFEF"
-        android:textSize="22sp"
+        android:textColor="@color/color_dark_blue"
+        android:textSize="35sp"
         android:textStyle="bold" />
 
     <com.github.mikephil.charting.charts.BarChart

@@ -17,8 +17,8 @@
 
         android:text="good"
         android:textAlignment="center"
-        android:textColor="#F3F0F0"
-        android:textSize="22sp"
+        android:textColor="@color/color_dark_blue"
+        android:textSize="35sp"
         android:textStyle="bold" />
 
     <com.github.mikephil.charting.charts.PieChart
