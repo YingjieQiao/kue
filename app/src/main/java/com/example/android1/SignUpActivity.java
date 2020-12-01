@@ -58,6 +58,15 @@ public class SignUpActivity extends AppCompatActivity {
                 Toast.makeText(SignUpActivity.this, " Sign up Suceefully", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
                 startActivity(intent);
+
+                accountRef.child(username).child("stats").child("averageRating").setValue(0);
+                accountRef.child(username).child("stats").child("customerTraffic").child("10am-2pm").setValue(0);
+                accountRef.child(username).child("stats").child("customerTraffic").child("2pm-6pm").setValue(0);
+                accountRef.child(username).child("stats").child("customerTraffic").child("6pm-10pm").setValue(0);
+                accountRef.child(username).child("stats").child("dailyRevenue").setValue(0);
+                accountRef.child(username).child("stats").child("totalCustomers").setValue(0);
+                accountRef.child(username).child("stats").child("totalRatings").setValue(0);
+
             }
         });
     }
