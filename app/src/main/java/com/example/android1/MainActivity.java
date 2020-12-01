@@ -3,10 +3,13 @@ package com.example.android1;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Html;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +26,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
+    private Handler mHandler;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference accounts = database.getReference("accounts");
@@ -49,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,14 +69,23 @@ public class MainActivity extends AppCompatActivity {
                                         HomePageActivity.class);
                                 startActivity(intent);
                             } else {
-                                Toast.makeText(getApplicationContext(),
-                                        "Wrong username or password",
-                                        Toast.LENGTH_SHORT).show();
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        System.out.println(data);
+                                        Toast.makeText(MainActivity.this,
+                                                "Wrong username or password",
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                             }
+
                         }
                     });
                 }
             });
+
+
     }
 
 
@@ -91,10 +105,13 @@ public class MainActivity extends AppCompatActivity {
                         return;
                     }
                 }
+                finishedCallback.callback(false);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {}
         });
     }
+
+
 }
