@@ -3,10 +3,13 @@ package com.example.android1;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.text.Html;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,50 +26,66 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
-    private String sharedPrefFile = "com.example.android1.mainsharedprefs";
-    SharedPreferences mPreferences;
-    private static String USER = "default"; // the current user logged in the app
-    private static DataSnapshot DB;
+    private Handler mHandler;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference accounts = database.getReference("accounts");
-
+    Button loginButton;
+    EditText username;
+    EditText password;
+    Button signUp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
 
-        Button loginButton = findViewById(R.id.button_cash);
-        EditText username = findViewById(R.id.username);
-        EditText password = findViewById(R.id.password);
+        loginButton = findViewById(R.id.button_cash);
+        username = findViewById(R.id.username);
+        password = findViewById(R.id.password);
+        signUp = findViewById(R.id.button_start_sign_up);
+
+        signUp.setText(Html.fromHtml("<u>sign up here</u>"));
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
+                startActivity(intent);
+            }
+        });
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(LOG_TAG, "Login Button clicked!");
-                SharedPreferences.Editor preferencesEditor = mPreferences.edit();
-                preferencesEditor.putString(USER, username.getText().toString());
-                preferencesEditor.apply();
+                String[] parts = username.getText().toString().split("@");
+                AppProperties.setUsername(parts[0]);
                 checkPassword(username.getText().toString(), password.getText().toString(),
                             new CompareValueCallback<Boolean>() {
                         @Override
                         public void callback(Boolean data) {
                             if (data) {
-                                Utils.generate_db_key(mPreferences);
                                 Intent intent = new Intent(MainActivity.this,
                                         HomePageActivity.class);
                                 startActivity(intent);
                             } else {
-                                Toast.makeText(getApplicationContext(),
-                                        "Wrong username or password",
-                                        Toast.LENGTH_SHORT).show();
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        System.out.println(data);
+                                        Toast.makeText(MainActivity.this,
+                                                "Wrong username or password",
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                             }
+
                         }
                     });
                 }
             });
+
+
     }
 
 
@@ -86,10 +105,13 @@ public class MainActivity extends AppCompatActivity {
                         return;
                     }
                 }
+                finishedCallback.callback(false);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {}
         });
     }
+
+
 }

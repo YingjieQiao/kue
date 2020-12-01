@@ -9,6 +9,24 @@ public class Order {
     Long FinishTime;
     String OrderDate;
     String OrderID;
+    Double Rating;
+    Double ETA;
+
+    public Double getETA() {
+        return ETA;
+    }
+
+    public void setETA(Double ETA) {
+        this.ETA = ETA;
+    }
+
+    public Double getRating() {
+        return Rating;
+    }
+
+    public void setRating(Double rating) {
+        Rating = rating;
+    }
 
     public String getOrderID() {
         return OrderID;
@@ -38,7 +56,6 @@ public class Order {
     }
 
     public HashMap<String,String> getFood() {
-
         return Food;
     }
 
@@ -56,13 +73,15 @@ public class Order {
 
 
     public Order(HashMap<String,String> food, Long orderTime, Long finishTime,
-                 String orderDate, String id) {
+                 String orderDate, String id, Double rating, Double eta) {
 
         Food = food;
         OrderTime = orderTime;
         FinishTime = finishTime;
         OrderDate = orderDate;
         OrderID = id;
+        Rating = rating;
+        ETA = eta;
     }
 }
 

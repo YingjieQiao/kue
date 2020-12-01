@@ -1,6 +1,11 @@
 package com.example.android1;
 
 import android.content.SharedPreferences;
+import android.net.Uri;
+import android.util.Log;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -9,6 +14,7 @@ public class Utils {
     private static String sharedPrefFile = "com.example.android1.mainsharedprefs";
     private static String USER; // the current user logged in the app
     private static String DB_KEY_USERNAME; // the child in firebase to query from
+
 
     public static void generate_db_key(SharedPreferences mPreferences) {
         /*
@@ -27,4 +33,9 @@ public class Utils {
         preferencesEditor.putString(DB_KEY_USERNAME, db_key);
         preferencesEditor.apply();
     }
+    public static String generateURL(String username, String receiptId){
+        return "http://3.82.106.27/" + username + "/" + receiptId;
+    }
+
+
 }
