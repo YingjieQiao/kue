@@ -21,6 +21,10 @@ public class RatingsStatsActivity extends AppCompatActivity {
     DatabaseReference database;
     DatabaseReference ratersStats;
     DatabaseReference ratingsStats;
+    DatabaseReference order_web;
+
+    int totalRaters = 0;
+    Double totalRating = 0.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,32 +35,50 @@ public class RatingsStatsActivity extends AppCompatActivity {
         ratingBar = findViewById(R.id.ratingBar); // ratings bar
 
         // firebase references
-        database = FirebaseDatabase.getInstance().getReference().child("accounts").child("username1").child("stats");
-        ratersStats = database.child("totalRatings");
-        ratingsStats = database.child("averageRating");
+        String username = AppProperties.getInstance().username;
+        database = FirebaseDatabase.getInstance().getReference()
+                .child("accounts").child(username);
+        ratersStats = database.child("stats").child("totalRatings");
+        ratingsStats = database.child("stats").child("averageRating");
+        order_web =  database.child("order_web");
 
-        totalRaters(); // display total no. of raters
-        setRatings(); // display ratings
+        getData();
+        showRatings(); // display ratings
     }
 
-    // query the total no. of customers who rated
-    private void totalRaters() {
-        ratersStats.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) { ratings.setText("Total Raters: " + snapshot.getValue()); }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {}
-        });
-    }
 
     // set the number of stars on the RatingsBar
-    private void setRatings() {
+    private void showRatings() {
         ratingsStats.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) { ratingBar.setRating(((Double) snapshot.getValue()).floatValue()); }
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Double ratingDouble = totalRating / totalRaters;
+                ratingBar.setRating(ratingDouble.floatValue());
+                ratings.setText("Total Raters: " + totalRaters);
+            }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {}
         });
 
+    }
+
+    private void getData() {
+        order_web.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot order : snapshot.getChildren()) {
+                    Double rating_val = Double.parseDouble(order.child("rating").getValue().toString());
+                    if (rating_val != null && rating_val != 0) {
+                        totalRating += rating_val;
+                        totalRaters += 1;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

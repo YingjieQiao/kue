@@ -41,7 +41,9 @@ public class FoodStatActivity extends AppCompatActivity {
         foodsChart = findViewById(R.id.foodStats);
 
         // firebase references
-        database = FirebaseDatabase.getInstance().getReference().child("accounts").child("username1").child("stats");
+        String username = AppProperties.getInstance().username;
+        database = FirebaseDatabase.getInstance().getReference().
+                child("accounts").child(username).child("stats");
         revenueStats = database.child("dailyRevenue");
         foodStats = database.child("food");
 

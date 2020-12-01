@@ -79,7 +79,7 @@ public class CashierActivity extends AppCompatActivity {
                 if (snapshot.hasChildren()) {
                     for (DataSnapshot dish : snapshot.getChildren()) {
                         Double price = Double.parseDouble(dish.child("price").getValue().toString());
-                        Double eta = Double.parseDouble(dish.child("price").getValue().toString());
+                        Double eta = Double.parseDouble(dish.child("eta").getValue().toString());
 
                         foodList.add((String) dish.child("name").getValue());
                         foodCost.add(price);
@@ -170,7 +170,7 @@ public class CashierActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Stats statistics = snapshot.getValue(Stats.class); // retrieve existing statistics
 
-                updateRatingStats(statistics); //retrieve all ratings & update stats
+                //updateRatingStats(statistics); //retrieve all ratings & update stats
                 updateDailyRevenue(statistics); // update daily revenue stats
                 updateFoodStats(statistics); // update food stats
                 updateCustomerTraffic(statistics); // update customer traffic stats
