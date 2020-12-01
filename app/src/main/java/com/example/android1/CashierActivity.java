@@ -163,7 +163,7 @@ public class CashierActivity extends AppCompatActivity {
             Toast.makeText(CashierActivity.this, "Your order" + " has been submitted", Toast.LENGTH_SHORT).show(); // notify cashiers an order has been made
         }else{
 
-            Toast.makeText(CashierActivity.this, "No order is found , please try again later ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(CashierActivity.this, "No order is found , please try again later "  , Toast.LENGTH_SHORT).show();
 
         }
     }
