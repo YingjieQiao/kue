@@ -1,72 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/login_background"
-    android:gravity="center_horizontal"
+    android:gravity="center"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:layout_marginTop="50dp"
         android:text="K U E"
         android:textColor="@color/colorPrimary"
         android:textSize="26sp"
+        android:textStyle="bold"
         />
 
     <TextView
         android:id="@+id/textview"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:text="signup"
+        android:text="Sign Up"
+        android:textStyle="bold"
         android:textColor="@color/color_purple"
         android:textSize="22sp" />
 
     <EditText
         android:id="@+id/signup_username"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:background="@drawable/edit_text_border"
         android:ems="10"
-        android:hint=" email"
+        android:hint="   Email"
+        android:backgroundTint="@color/cardview_shadow_start_color"
         android:textColorHighlight="#ff7eff15"
         android:textColorHint="@color/hintColor"
-        android:textSize="23sp" />
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/signup_password"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/edit_text_border"
         android:ems="10"
-        android:hint=" password"
+        android:backgroundTint="@color/cardview_shadow_start_color"
+        android:hint="   Password"
+        android:layout_marginVertical="10dp"
         android:inputType="textPassword"
         android:textColorHint="@color/hintColor"
-        android:textSize="23sp" />
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/signup_password_verify"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_height="40dp"
         android:background="@drawable/edit_text_border"
         android:ems="10"
-        android:hint=" verify your password"
+        android:backgroundTint="@color/cardview_shadow_start_color"
+        android:hint="   Verify your Password"
         android:inputType="textPassword"
         android:textColorHint="@color/hintColor"
-        android:textSize="23sp" />
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/button_finish_signup"
         android:layout_width="110dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/sign_up"
+        android:layout_marginTop="15dp"
+        android:text="Sign Up"
+        android:layout_marginBottom="40dp"
+
         android:textSize="18sp" />
 
 
