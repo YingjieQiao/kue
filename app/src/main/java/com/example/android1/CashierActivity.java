@@ -49,6 +49,7 @@ public class CashierActivity extends AppCompatActivity {
         submitBtn = findViewById(R.id.submitbutton);
 
         String username = AppProperties.getInstance().username;
+        System.out.println("Username" + username);
         db = FirebaseDatabase.getInstance().getReference().child("accounts").child(username);
         order = db.child("orders");
         webOrder = db.child("order_web");

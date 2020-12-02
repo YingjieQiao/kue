@@ -111,5 +111,6 @@ public class CustomerStatsActivity extends AppCompatActivity {
         customerTrafficChart.getLegend().setEnabled(false); //no legends
         customerTrafficChart.animate(); //animate the chart to appear
 
+        customerTrafficChart.invalidate();
     }
 }
