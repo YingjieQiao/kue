@@ -107,6 +107,7 @@ public class CashierActivity extends AppCompatActivity {
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
         params.setMargins(5, 15, 5, 15);
+
         //loop through food ArrayList to create food buttons
         for (String food: foodList) {
 
@@ -138,7 +139,7 @@ public class CashierActivity extends AppCompatActivity {
                 }
 
                 orderList.setText(orderLs.toString());
-                cost.setText(String.valueOf(totalCost));
+                cost.setText("$" + String.valueOf(totalCost));
             });
 
             //remove food from order
@@ -151,7 +152,7 @@ public class CashierActivity extends AppCompatActivity {
                     }
                 }
                 orderList.setText(orderLs.toString());
-                cost.setText(String.valueOf(totalCost));
+                cost.setText("$" + String.valueOf(totalCost));
             });
         }
     }
@@ -173,7 +174,7 @@ public class CashierActivity extends AppCompatActivity {
 
             Toast.makeText(CashierActivity.this, "Your order" + " has been submitted", Toast.LENGTH_SHORT).show(); // notify cashiers an order has been made
         }else{
-            Toast.makeText(CashierActivity.this, "There are no orders available to submit", Toast.LENGTH_SHORT).show();
+            Toast.makeText(CashierActivity.this, "There are no orders available to submit", Toast.LENGTH_SHORT).show(); // notify cashiers that no order is made
         }
     }
 
@@ -185,7 +186,6 @@ public class CashierActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Stats statistics = snapshot.getValue(Stats.class); // retrieve existing statistics
 
-                //updateRatingStats(statistics); //retrieve all ratings & update stats
                 updateDailyRevenue(statistics); // update daily revenue stats
                 updateFoodStats(statistics); // update food stats
                 updateCustomerTraffic(statistics); // update customer traffic stats
@@ -197,32 +197,6 @@ public class CashierActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {}
         });
-    }
-
-
-    //retrieve all ratings & update stats
-    private void updateRatingStats(Stats statistics) {
-        webOrder.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Long ratings = 0L;
-                Long count = 0L;
-
-                if (snapshot.hasChildren()) {
-                    for (DataSnapshot rating : snapshot.getChildren()) {
-                        ratings += (Long) rating.child("rating").getValue();
-                        count ++;
-                    }
-                }
-                statistics.averageRating = ((Long)(ratings/count)).doubleValue();
-                statistics.totalRatings = count;
-                stats.setValue(statistics);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {}
-        });
-
     }
 
 
