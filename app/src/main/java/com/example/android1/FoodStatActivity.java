@@ -109,6 +109,7 @@ public class FoodStatActivity extends AppCompatActivity {
         foodDataSet.setValueTextSize(12f);
         XAxis xAxis = foodsChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setLabelRotationAngle(45f);
 
         foodsChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(foodNames)); // set the x-axis labels as the names of all the foods, foodNames
 

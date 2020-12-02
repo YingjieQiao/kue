@@ -61,36 +61,36 @@ public class MainActivity extends AppCompatActivity {
                 String[] parts = username.getText().toString().split("@");
                 AppProperties.setUsername(parts[0]);
                 checkPassword(username.getText().toString(), password.getText().toString(),
-                            new CompareValueCallback<Boolean>() {
-                        @Override
-                        public void callback(Boolean data) {
-                            if (data) {
-                                Intent intent = new Intent(MainActivity.this,
-                                        HomePageActivity.class);
-                                startActivity(intent);
-                            } else {
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        System.out.println(data);
-                                        Toast.makeText(MainActivity.this,
-                                                "Wrong username or password",
-                                                Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            }
+                        new CompareValueCallback<Boolean>() {
+                            @Override
+                            public void callback(Boolean data) {
+                                if (data) {
+                                    Intent intent = new Intent(MainActivity.this,
+                                            HomePageActivity.class);
+                                    startActivity(intent);
+                                } else {
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            System.out.println(data);
+                                            Toast.makeText(MainActivity.this,
+                                                    "Wrong username or password",
+                                                    Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
 
-                        }
-                    });
-                }
-            });
+                            }
+                        });
+            }
+        });
 
 
     }
 
 
     private void checkPassword(String username, String password,
-                                       @NonNull CompareValueCallback<Boolean> finishedCallback) {
+                               @NonNull CompareValueCallback<Boolean> finishedCallback) {
         accounts.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
