@@ -27,7 +27,6 @@ import java.util.UUID;
 import org.threeten.bp.LocalTime;
 
 
-
 public class CashierActivity extends AppCompatActivity {
 
     TextView cost, orderList;
@@ -260,7 +259,5 @@ public class CashierActivity extends AppCompatActivity {
         Intent qrPageIntent = new Intent(this, QRCodeActivity.class);
         qrPageIntent.putExtra(QRCodeActivity.key, url);
         startActivity(qrPageIntent);
-        setContentView(R.layout.activity_main);
-
     }
 }
