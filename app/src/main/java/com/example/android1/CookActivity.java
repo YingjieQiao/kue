@@ -62,6 +62,7 @@ public class CookActivity extends AppCompatActivity {
                 Log.i("ADAPTER", "Order onBindViewHolder is called");
                 holder.setOrder(model);
                 holder.setId(model.getOrderID());
+                holder.checkBoxFinished.setChecked(false);
             }
         };
         recyclerView.setAdapter(adapter);
