@@ -1,5 +1,6 @@
 package com.example.android1;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 
@@ -109,8 +110,11 @@ public class CashierActivity extends AppCompatActivity {
             Button removeFoodBtn = new Button((this));
 
             addFoodBtn.setText("Add " + food);
+            addFoodBtn.setBackgroundColor(Color.BLUE);
+            addFoodBtn.setTextColor(Color.parseColor("#00ff00"));
             removeFoodBtn.setText("Delete " + food);
-
+            removeFoodBtn.setBackgroundColor(Color.parseColor("#fc0fc0"));
+            removeFoodBtn.setTextColor(Color.parseColor("#ADFF2F"));
             layout.addView(addFoodBtn);
             layout.addView(removeFoodBtn);
 
