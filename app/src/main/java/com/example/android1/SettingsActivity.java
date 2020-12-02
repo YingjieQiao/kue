@@ -65,6 +65,8 @@ public class SettingsActivity extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference menu =  database.getReference("accounts")
                 .child(db_key_username).child("menu");
+        DatabaseReference stats_menu = database.getReference().child("accounts")
+                .child(db_key_username).child("stats").child("food");
 
         submitbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,7 +80,7 @@ public class SettingsActivity extends AppCompatActivity {
                 dish.setEta(eta);
                 System.out.println(menu);
                 menu.push().setValue(dish);
-                database.getReference().child("accounts").child(db_key_username).child("stats").child("food").child(name).setValue(0);
+                stats_menu.child(name).setValue(0);
                 Toast.makeText(SettingsActivity.this, "dish inserted succesfully", Toast.LENGTH_LONG).show();
             }
         });
@@ -91,7 +93,7 @@ public class SettingsActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot dish : snapshot.getChildren()) {
-                            if (name_delete.equals(dish.child("name").getValue())) {
+                            if (name_delete.equals(dish.getKey())) {
                                 dish.getRef().removeValue();
                                 }
                             }
@@ -102,6 +104,23 @@ public class SettingsActivity extends AppCompatActivity {
 
                     }
                 });
+
+                stats_menu.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot dish : snapshot.getChildren()) {
+                            if (name_delete.equals(dish.getKey())) {
+                                dish.getRef().removeValue();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
                 Toast.makeText(SettingsActivity.this,
                         "dish removed succesfully", Toast.LENGTH_LONG).show();
             }
