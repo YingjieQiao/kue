@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,78 +9,79 @@
     android:orientation="vertical"
     tools:context=".HomePageActivity">
 
-    <Button
-        android:id="@+id/button_cook"
-        android:layout_width="176dp"
-        android:layout_height="182dp"
-        android:drawableTop="@drawable/cook_logo"
-        android:text="@string/button_label_cook"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.068"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.371"
-        tools:text="Cook" />
-
-    <Button
-        android:id="@+id/button_cashier"
-        android:layout_width="176dp"
-        android:layout_height="182dp"
-        android:drawableTop="@drawable/cashier_logo"
-        android:text="@string/button_label_cashier"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.931"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.371"
-        tools:text="Cashier" />
-
-    <Button
-        android:id="@+id/button_statistics"
-        android:layout_width="176dp"
-        android:layout_height="182dp"
-        android:drawableTop="@drawable/stats_logo"
-        android:text="@string/button_label_stats"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.068"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.795"
-        tools:text="Dashboard" />
-
-    <Button
-        android:id="@+id/button_settings"
-        android:layout_width="176dp"
-        android:layout_height="182dp"
-        android:drawableTop="@drawable/settings_logo"
-        android:text="@string/button_label_settings"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.931"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.795"
-        tools:text="Settings" />
-
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="250dp"
-        android:layout_height="102dp"
+        android:textAlignment="center"
+        android:layout_height="65sp"
+        android:layout_width="match_parent"
         android:text="Welcome!"
-        android:textColor="@color/color_purple"
-        android:textSize="50sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.007" />
+        android:background="@color/cardview_dark_background"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        android:textSize="35sp"
+        android:gravity="center" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="40sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/button_cook"
+            android:layout_width="176dp"
+            android:layout_height="182dp"
+            android:drawableTop="@drawable/cook_logo"
+            android:text="@string/button_label_cook"
+            android:textSize="16sp"
+            tools:text="Cook" />
+
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/button_cashier"
+            android:layout_width="176dp"
+            android:layout_height="182dp"
+            android:drawableTop="@drawable/cashier_logo"
+            android:text="@string/button_label_cashier"
+            android:textSize="16sp"
+            tools:text="Cashier" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/button_statistics"
+            android:layout_width="176dp"
+            android:layout_height="182dp"
+            android:drawableTop="@drawable/stats_logo"
+            android:text="@string/button_label_stats"
+            android:textSize="16sp"
+            tools:text="Dashboard" />
+
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/button_settings"
+            android:layout_width="176dp"
+            android:layout_height="182dp"
+            android:drawableTop="@drawable/settings_logo"
+            android:text="@string/button_label_settings"
+            android:textSize="16sp"
+            tools:text="Settings" />
+
+    </LinearLayout>
+
+</LinearLayout>
