@@ -9,13 +9,11 @@
     android:background="@drawable/login_background"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:text="K U E"
-        android:textColor="@color/colorPrimary"
-        android:textSize="26sp"
-        android:layout_marginTop="50dp"/>
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="238dp"
+        android:layout_height="191dp"
+        app:srcCompat="@drawable/kue" />
 
     <TextView
         android:id="@+id/textview"
