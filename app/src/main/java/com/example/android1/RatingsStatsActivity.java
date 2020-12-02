@@ -56,6 +56,7 @@ public class RatingsStatsActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Double ratingDouble = totalRating / totalRaters;
                 ratingBar.setRating(ratingDouble.floatValue());
+                rating.setText("Restaurant Ratings: " + String.valueOf(Math.round(ratingDouble)));
                 ratings.setText("Total Raters: " + totalRaters);
             }
             @Override

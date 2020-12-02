@@ -8,23 +8,24 @@
     android:background="@drawable/customer_stats"
     tools:context=".CustomerStatsActivity">
 
-
     <TextView
         android:id="@+id/totalCustomers"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
-
+        android:gravity="center"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        android:background="@color/cardview_dark_background"
         android:text="good"
-        android:textAlignment="center"
-        android:textColor="@color/color_dark_blue"
-        android:textSize="35sp"
-        android:textStyle="bold" />
+        android:textSize="26sp"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="30dp"/>
 
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/customerTraffic"
         android:layout_width="match_parent"
         android:layout_height="260dp"/>
-
 
 </LinearLayout>

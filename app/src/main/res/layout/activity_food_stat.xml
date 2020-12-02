@@ -13,26 +13,29 @@
         android:id="@+id/totalRevenue"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:gravity="center_horizontal"
-        android:text="hi"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="22sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
         android:gravity="center"
-        android:paddingTop="10dp"
-        android:text="Food Sales"
-        android:textColor="@color/color_dark_blue"
-        android:textSize="35sp"
-        android:textStyle="bold" />
+        android:text="hi"
+        android:textSize="26sp"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        android:background="@color/cardview_dark_background"/>
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="40dp"/>
+        android:layout_height="20dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:gravity="center"
+        android:text="Food Sales"
+        android:textStyle="bold"
+        android:textSize="35sp"
+        android:textColor="@color/cardview_dark_background"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
 
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/foodStats"
