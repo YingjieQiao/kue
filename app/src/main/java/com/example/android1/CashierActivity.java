@@ -101,7 +101,11 @@ public class CashierActivity extends AppCompatActivity {
 
         LinearLayout layout = findViewById(R.id.CashierActivity);
         totalCost = 0.;
-
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        params.setMargins(5, 15, 5, 15);
         //loop through food ArrayList to create food buttons
         for (String food: foodList) {
 
@@ -110,11 +114,13 @@ public class CashierActivity extends AppCompatActivity {
             Button removeFoodBtn = new Button((this));
 
             addFoodBtn.setText("Add " + food);
-            addFoodBtn.setBackgroundColor(Color.BLUE);
-            addFoodBtn.setTextColor(Color.parseColor("#00ff00"));
+            addFoodBtn.setBackgroundColor(Color.parseColor("#F29035"));
+            addFoodBtn.setTextColor(Color.BLACK);
             removeFoodBtn.setText("Delete " + food);
-            removeFoodBtn.setBackgroundColor(Color.parseColor("#fc0fc0"));
-            removeFoodBtn.setTextColor(Color.parseColor("#ADFF2F"));
+            removeFoodBtn.setBackgroundColor(Color.parseColor("#E34C45"));
+            removeFoodBtn.setTextColor(Color.BLACK);
+            addFoodBtn.setLayoutParams(params);
+            removeFoodBtn.setLayoutParams(params);
             layout.addView(addFoodBtn);
             layout.addView(removeFoodBtn);
 
