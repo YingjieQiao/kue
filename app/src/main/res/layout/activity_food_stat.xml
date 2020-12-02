@@ -5,23 +5,31 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:background="@drawable/food_stats"
     tools:context=".FoodStatActivity">
 
 
     <TextView
         android:id="@+id/totalRevenue"
-        android:textAlignment="center"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:gravity="center_horizontal" />
+        android:gravity="center_horizontal"
+        android:text="hi"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="22sp"
+        android:textStyle="bold" />
 
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_horizontal"
+        android:paddingTop="10dp"
         android:text="Food Sales"
         android:textAlignment="center"
-        android:layout_width="match_parent"
-        android:paddingTop="10dp"
-        android:layout_height="50dp"
-        android:gravity="center_horizontal" />
+        android:textColor="@color/color_dark_blue"
+        android:textSize="35sp"
+        android:textStyle="bold" />
 
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/foodStats"

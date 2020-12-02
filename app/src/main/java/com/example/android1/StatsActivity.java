@@ -13,8 +13,11 @@ public class StatsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_stats);
 
         // buttons onclick to navigate to food, customer traffic, ratings statistic pages
-        findViewById(R.id.foodDetails).setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), FoodStatActivity.class)));
-        findViewById(R.id.customerTraffic).setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), CustomerStatsActivity.class)));
-        findViewById(R.id.ratings).setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), RatingsStatsActivity.class)));
+        findViewById(R.id.foodDetails).setOnClickListener(v -> startActivity(
+                new Intent(StatsActivity.this, FoodStatActivity.class)));
+        findViewById(R.id.customerTraffic).setOnClickListener(v -> startActivity(
+                new Intent(StatsActivity.this, CustomerStatsActivity.class)));
+        findViewById(R.id.ratings).setOnClickListener(v -> startActivity(
+                new Intent(StatsActivity.this, RatingsStatsActivity.class)));
     }
 }

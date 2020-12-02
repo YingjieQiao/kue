@@ -78,6 +78,7 @@ public class SettingsActivity extends AppCompatActivity {
                 dish.setEta(eta);
                 System.out.println(menu);
                 menu.push().setValue(dish);
+                database.getReference().child("accounts").child(db_key_username).child("stats").child("food").child(name).setValue(0);
                 Toast.makeText(SettingsActivity.this, "dish inserted succesfully", Toast.LENGTH_LONG).show();
             }
         });

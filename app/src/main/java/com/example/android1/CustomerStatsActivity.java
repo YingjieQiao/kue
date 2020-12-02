@@ -28,6 +28,7 @@ public class CustomerStatsActivity extends AppCompatActivity {
     DatabaseReference database;
     DatabaseReference customersStats;
     DatabaseReference trafficStats;
+    String username = AppProperties.getInstance().username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,8 @@ public class CustomerStatsActivity extends AppCompatActivity {
         customerTrafficChart = findViewById(R.id.customerTraffic);
 
         // database references
-        database = FirebaseDatabase.getInstance().getReference().child("accounts").child("username1").child("stats");
+        database = FirebaseDatabase.getInstance().getReference().
+                child("accounts").child(username).child("stats");
         customersStats = database.child("totalCustomers");
         trafficStats = database.child("customerTraffic");
 

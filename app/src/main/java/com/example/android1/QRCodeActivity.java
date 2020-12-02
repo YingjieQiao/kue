@@ -39,7 +39,7 @@ public class QRCodeActivity extends AppCompatActivity {
     ImageView qr_image;
     QRGEncoder qrgEncoder;
     Bitmap bitmap;
-    final static String TAG = "QR Page";
+    final static String TAG = "QRPage";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

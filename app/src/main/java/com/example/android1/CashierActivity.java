@@ -1,5 +1,6 @@
 package com.example.android1;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 
@@ -79,7 +80,7 @@ public class CashierActivity extends AppCompatActivity {
                 if (snapshot.hasChildren()) {
                     for (DataSnapshot dish : snapshot.getChildren()) {
                         Double price = Double.parseDouble(dish.child("price").getValue().toString());
-                        Double eta = Double.parseDouble(dish.child("price").getValue().toString());
+                        Double eta = Double.parseDouble(dish.child("eta").getValue().toString());
 
                         foodList.add((String) dish.child("name").getValue());
                         foodCost.add(price);
@@ -100,7 +101,11 @@ public class CashierActivity extends AppCompatActivity {
 
         LinearLayout layout = findViewById(R.id.CashierActivity);
         totalCost = 0.;
-
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        params.setMargins(5, 15, 5, 15);
         //loop through food ArrayList to create food buttons
         for (String food: foodList) {
 
@@ -109,8 +114,13 @@ public class CashierActivity extends AppCompatActivity {
             Button removeFoodBtn = new Button((this));
 
             addFoodBtn.setText("Add " + food);
+            addFoodBtn.setBackgroundColor(Color.parseColor("#F29035"));
+            addFoodBtn.setTextColor(Color.BLACK);
             removeFoodBtn.setText("Delete " + food);
-
+            removeFoodBtn.setBackgroundColor(Color.parseColor("#E34C45"));
+            removeFoodBtn.setTextColor(Color.BLACK);
+            addFoodBtn.setLayoutParams(params);
+            removeFoodBtn.setLayoutParams(params);
             layout.addView(addFoodBtn);
             layout.addView(removeFoodBtn);
 
@@ -147,7 +157,7 @@ public class CashierActivity extends AppCompatActivity {
 
     // submit a new order
     private void submitOrder(String receiptId) {
-        if (totalCost!=0){
+        if(totalCost!=0){
             // adding order details
             orderLs.put("totalCost", Double.toString(totalCost)); //add total cost into order
             orderLs.put("receiptOrder", receiptId); //add receipt ID into order
@@ -162,11 +172,10 @@ public class CashierActivity extends AppCompatActivity {
 
             Toast.makeText(CashierActivity.this, "Your order" + " has been submitted", Toast.LENGTH_SHORT).show(); // notify cashiers an order has been made
         }else{
-
-            Toast.makeText(CashierActivity.this, "No order is found , please try again later "  , Toast.LENGTH_SHORT).show();
-
+            Toast.makeText(CashierActivity.this, "There are no orders available to submit", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     // update restaurant statistics
     private void statsUpdate() {
@@ -175,7 +184,7 @@ public class CashierActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Stats statistics = snapshot.getValue(Stats.class); // retrieve existing statistics
 
-                updateRatingStats(statistics); //retrieve all ratings & update stats
+                //updateRatingStats(statistics); //retrieve all ratings & update stats
                 updateDailyRevenue(statistics); // update daily revenue stats
                 updateFoodStats(statistics); // update food stats
                 updateCustomerTraffic(statistics); // update customer traffic stats
@@ -188,6 +197,7 @@ public class CashierActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {}
         });
     }
+
 
     //retrieve all ratings & update stats
     private void updateRatingStats(Stats statistics) {
@@ -214,6 +224,7 @@ public class CashierActivity extends AppCompatActivity {
 
     }
 
+
     //update daily revenue
     private void updateDailyRevenue(Stats statistics) {
         statistics.dailyRevenue = statistics.dailyRevenue + totalCost;
@@ -236,6 +247,7 @@ public class CashierActivity extends AppCompatActivity {
             }
         }
     }
+
 
     // update customer traffic stats
     private void updateCustomerTraffic(Stats statistics) {
