@@ -13,6 +13,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DecimalFormat;
+
 public class RatingsStatsActivity extends AppCompatActivity {
 
     // declare objects
@@ -56,7 +58,8 @@ public class RatingsStatsActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Double ratingDouble = totalRating / totalRaters;
                 ratingBar.setRating(ratingDouble.floatValue());
-                rating.setText("Restaurant Ratings: " + String.valueOf(Math.round(ratingDouble)));
+                DecimalFormat df = new DecimalFormat("#.##");
+                rating.setText("Restaurant Ratings: " + String.valueOf(df.format(ratingDouble)));
                 ratings.setText("Total Raters: " + totalRaters);
             }
             @Override
