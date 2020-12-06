@@ -72,9 +72,6 @@ public class SettingsActivity extends AppCompatActivity {
         submitbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-
                 try {
                     String name = nameinput.getText().toString().trim();
                     String price_str = priceinput.getText().toString().trim();
@@ -97,7 +94,6 @@ public class SettingsActivity extends AppCompatActivity {
                     menu.push().setValue(dish);
                     stats_menu.child(name).setValue(0);
                     showToastMsg("dish inserted succesfully");
-                    //Toast.makeText(SettingsActivity.this, "dish inserted succesfully", Toast.LENGTH_LONG).show();
                 } catch (IllegalArgumentException ex) {
                     Log.e("SETTINGS", "user input error");
                     showToastMsg("user input error");
@@ -148,6 +144,7 @@ public class SettingsActivity extends AppCompatActivity {
 
                         }
                     });
+                    showToastMsg("dish removed succesfully");
                 } catch (IllegalArgumentException ex) {
                     Log.e("SETTINGS", "user input error");
                     SettingsActivity.this.runOnUiThread(new Runnable() {
@@ -165,10 +162,6 @@ public class SettingsActivity extends AppCompatActivity {
                         }
                     });
                 }
-
-
-                Toast.makeText(SettingsActivity.this,
-                        "dish removed succesfully", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -177,54 +170,75 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String name = nameinput_update_price.getText().toString().trim();
                 String new_price = priceinput_update.getText().toString().trim();
-                menu.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot dish : snapshot.getChildren()) {
-                            if (name.equals(dish.child("name").getValue())) {
-                                String postKey = dish.getRef().getKey();
-                                assert postKey != null;
-                                menu.child(postKey).child("price").setValue(new_price);
+                try {
+                    Utils.checkValidString(name);
+                    Utils.checkValidString(new_price);
 
+                    menu.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot dish : snapshot.getChildren()) {
+                                if (name.equals(dish.child("name").getValue())) {
+                                    String postKey = dish.getRef().getKey();
+                                    assert postKey != null;
+                                    menu.child(postKey).child("price").setValue(new_price);
+
+                                }
                             }
                         }
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-                });
-                Toast.makeText(SettingsActivity.this,
-                        "price updated succesfully", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                    Log.e("SETTINGS", "price updated");
+                    showToastMsg("price updated");
+                } catch (IllegalArgumentException ex) {
+                    Log.e("SETTINGS", "user input error");
+                    showToastMsg("user input error");
+                } catch (Exception ex) {
+                    Log.e("SETTINGS", "unknown error");
+                    showToastMsg("user input error, please try again");
+                }
+
+
             }
         });
 
         updatebutton_eta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = nameinput_update_eta.getText().toString().trim();
-                String new_eta = etainput_update.getText().toString().trim();
-                menu.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot dish : snapshot.getChildren()) {
-                            if (name.equals(dish.child("name").getValue())) {
-                                String postKey = dish.getRef().getKey();
-                                assert postKey != null;
-                                menu.child(postKey).child("eta").setValue(new_eta);
+                try {
+                    String name = nameinput_update_eta.getText().toString().trim();
+                    String new_eta = etainput_update.getText().toString().trim();
+                    menu.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot dish : snapshot.getChildren()) {
+                                if (name.equals(dish.child("name").getValue())) {
+                                    String postKey = dish.getRef().getKey();
+                                    assert postKey != null;
+                                    menu.child(postKey).child("eta").setValue(new_eta);
 
+                                }
                             }
                         }
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-                });
-                Toast.makeText(SettingsActivity.this,
-                        "ETA updated succesfully", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                    showToastMsg("ETA updated succesfully");
+                } catch (IllegalArgumentException ex) {
+                    Log.e("SETTINGS", "user input error");
+                    showToastMsg("user input error");
+                } catch (Exception ex) {
+                    Log.e("SETTINGS", "unknown error");
+                    showToastMsg("user input error, please try again");
+                }
+
             }
         });
     }
