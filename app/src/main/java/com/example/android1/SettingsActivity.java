@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -71,17 +72,39 @@ public class SettingsActivity extends AppCompatActivity {
         submitbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = nameinput.getText().toString().trim();
-                price = Double.parseDouble(priceinput.getText().toString().trim());
-                eta = Double.parseDouble(etainput.getText().toString().trim());
 
-                dish.setName(name);
-                dish.setPrice(price);
-                dish.setEta(eta);
-                System.out.println(menu);
-                menu.push().setValue(dish);
-                stats_menu.child(name).setValue(0);
-                Toast.makeText(SettingsActivity.this, "dish inserted succesfully", Toast.LENGTH_LONG).show();
+
+
+                try {
+                    String name = nameinput.getText().toString().trim();
+                    String price_str = priceinput.getText().toString().trim();
+                    String eta_str = etainput.getText().toString().trim();
+
+                    Utils.checkValidString(name);
+                    Utils.checkValidString(price_str);
+                    Utils.checkValidString(eta_str);
+
+                    price = Double.parseDouble(price_str);
+                    eta = Double.parseDouble(eta_str);
+
+                    Utils.checkValidNumber(price);
+                    Utils.checkValidNumber(eta);
+
+                    dish.setName(name);
+                    dish.setPrice(price);
+                    dish.setEta(eta);
+                    System.out.println(menu);
+                    menu.push().setValue(dish);
+                    stats_menu.child(name).setValue(0);
+                    showToastMsg("dish inserted succesfully");
+                    //Toast.makeText(SettingsActivity.this, "dish inserted succesfully", Toast.LENGTH_LONG).show();
+                } catch (IllegalArgumentException ex) {
+                    Log.e("SETTINGS", "user input error");
+                    Toast.makeText(SettingsActivity.this, "user input error", Toast.LENGTH_LONG).show();
+                } catch (Exception ex) {
+                    Log.e("SETTINGS", "unknown error");
+                    Toast.makeText(SettingsActivity.this, "unknown error", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -89,37 +112,58 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String name_delete = nameinput_delete.getText().toString().trim();
-                menu.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot dish : snapshot.getChildren()) {
-                            if (name_delete.equals(dish.getKey())) {
-                                dish.getRef().removeValue();
+
+                try {
+                    Utils.checkValidString(name_delete);
+                    menu.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot dish : snapshot.getChildren()) {
+                                if (name_delete.equals(dish.getKey())) {
+                                    dish.getRef().removeValue();
                                 }
                             }
                         }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-                });
+                        }
+                    });
 
-                stats_menu.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot dish : snapshot.getChildren()) {
-                            if (name_delete.equals(dish.getKey())) {
-                                dish.getRef().removeValue();
+                    stats_menu.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot dish : snapshot.getChildren()) {
+                                if (name_delete.equals(dish.getKey())) {
+                                    dish.getRef().removeValue();
+                                }
                             }
                         }
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-                });
+                        }
+                    });
+                } catch (IllegalArgumentException ex) {
+                    Log.e("SETTINGS", "user input error");
+                    SettingsActivity.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(SettingsActivity.this, "user input error", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                } catch (Exception ex) {
+                    Log.e("SETTINGS", "unknown error");
+                    SettingsActivity.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(SettingsActivity.this, "unknown error", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+
 
                 Toast.makeText(SettingsActivity.this,
                         "dish removed succesfully", Toast.LENGTH_LONG).show();
@@ -179,6 +223,15 @@ public class SettingsActivity extends AppCompatActivity {
                 });
                 Toast.makeText(SettingsActivity.this,
                         "ETA updated succesfully", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public void showToastMsg(String msg) {
+        SettingsActivity.this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(SettingsActivity.this, msg, Toast.LENGTH_LONG).show();
             }
         });
     }
