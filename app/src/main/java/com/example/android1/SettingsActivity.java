@@ -100,9 +100,11 @@ public class SettingsActivity extends AppCompatActivity {
                     //Toast.makeText(SettingsActivity.this, "dish inserted succesfully", Toast.LENGTH_LONG).show();
                 } catch (IllegalArgumentException ex) {
                     Log.e("SETTINGS", "user input error");
+                    showToastMsg("user input error");
                     Toast.makeText(SettingsActivity.this, "user input error", Toast.LENGTH_LONG).show();
                 } catch (Exception ex) {
                     Log.e("SETTINGS", "unknown error");
+                    showToastMsg("user input error, please try again");
                     Toast.makeText(SettingsActivity.this, "unknown error", Toast.LENGTH_LONG).show();
                 }
             }
