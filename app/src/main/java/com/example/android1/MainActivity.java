@@ -52,28 +52,36 @@ public class MainActivity extends AppCompatActivity {
             Log.d(LOG_TAG, "Login Button clicked!");
             String[] parts = username.getText().toString().split("@");
             AppProperties.setUsername(parts[0]);
-            checkPassword(username.getText().toString(), password.getText().toString(),
-                    new CompareValueCallback<Boolean>() {
-                        @Override
-                        public void callback(Boolean data) {
-                            if (data) {
-                                Intent intent = new Intent(MainActivity.this,
-                                        HomePageActivity.class);
-                                startActivity(intent);
-                            } else {
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        System.out.println(data);
-                                        Toast.makeText(MainActivity.this,
-                                                "Wrong username or password",
-                                                Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            }
 
-                        }
-                    });
+            String username_input = username.getText().toString();
+            String password_input = password.getText().toString();
+
+            try {
+                Utils.checkValidString(username_input);
+                Utils.checkValidString(password_input);
+
+                checkPassword(username_input, password_input,
+                        new CompareValueCallback<Boolean>() {
+                            @Override
+                            public void callback(Boolean data) {
+                                if (data) {
+                                    Intent intent = new Intent(MainActivity.this,
+                                            HomePageActivity.class);
+                                    startActivity(intent);
+                                } else {
+                                    showToastMsg("Wrong username or password");
+                                }
+
+                            }
+                        });
+            } catch (IllegalArgumentException ex) {
+                Log.e("SETTINGS", "user input error");
+                showToastMsg("user input error");
+            } catch (Exception ex) {
+                Log.e("SETTINGS", "unknown error");
+                showToastMsg("user input error, please try again");
+            }
+
         });
 
 
@@ -99,6 +107,15 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {}
+        });
+    }
+
+    public void showToastMsg(String msg) {
+        MainActivity.this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(MainActivity.this, msg, Toast.LENGTH_LONG).show();
+            }
         });
     }
 
