@@ -24,7 +24,7 @@ The food establishments have to shell out upwards of at least a couple hundred d
 
 # kue-web
 
-Web Component of [Kue](https://github.com/YingjieQiao/kue)
+[Web Component](https://github.com/YingjieQiao/kue-web) of Kue
 
 
 # App Walkthrough
