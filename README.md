@@ -3,7 +3,11 @@
 
 ### Idea Inspiration
 
-Our app concept was sparked off by the desire to improve queue systems in self-service food establishments. In our campus, food establishments that use queue number displays are aplenty. The issue that stuck out the most for this implementation is: the customer has to remain in the vicinity of the queue display in order to be able to view the current order being served. This might not be ideal in a pandemic ridden world, whereby social distancing needs to take priority. Next up, food establishments also use vibrating pagers. We realised that the vibrating pagers used in food establishments are passed around different customers the entire time. They require additional manpower for sanitisation, in order to reduce the spread of possible germs and viruses,etc. 
+Our app concept was sparked off by the desire to improve queue systems in self-service food establishments. In our campus, food establishments that use queue number displays are aplenty. The issue that stuck out the most for this implementation is: the customer has to remain in the vicinity of the queue display in order to be able to view the current order being served. This might not be ideal in a pandemic ridden world, whereby social distancing needs to take priority. 
+
+Next up, food establishments also use vibrating pagers. We realised that the vibrating pagers used in food establishments are passed around different customers the entire time. They require additional manpower for sanitisation, in order to reduce the spread of possible germs and viruses, etc. 
+
+
 The food establishments have to shell out upwards of at least a couple hundred dollars to purchase and implement those hardware solutions. This is where we spotted the opportunity for improvement. We could simply create an android app to replace the conventional implementations at a much lower cost, yet at the same time add in more functionality in order to create more value for the restaurants.  
 
 ![intro](https://user-images.githubusercontent.com/49013092/101912873-48424780-3bfd-11eb-8578-ebf2043f1fdf.png)
@@ -25,6 +29,10 @@ The food establishments have to shell out upwards of at least a couple hundred d
 # kue-web
 
 [Web Component](https://github.com/YingjieQiao/kue-web) of Kue
+
+This is our landing page for customers to track their order. 
+
+The motivation of separating this QR code + landing page from the Android App is that, **not every customer may have this app downloaded to their phones, but every customer would have a browser to view a website in their phones.** On the other hand, the customers do not have to download any additional applications and yet have access to information regarding when their order is ready, through the webpage. Moreover, Kue is more oriented towards restaurant management as a business (2B) solution, it would be a distraction for both the business owners and the customers with too many aspects in one same app. Therefore, an external web landing page would improve the accessibility of the App as well as providing a more focused business solution.
 
 
 # App Walkthrough
