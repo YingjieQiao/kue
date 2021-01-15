@@ -29,7 +29,7 @@ public class Utils {
     }
 
     public static String generateURL(String username, String receiptId){
-        return "http://3.82.106.27/" + username + "/" + receiptId;
+        return "http://54.210.78.24/" + username + "/" + receiptId;
     }
 
 
